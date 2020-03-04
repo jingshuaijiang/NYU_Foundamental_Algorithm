@@ -1,0 +1,396 @@
+% me=0 student solutions (ps file), me=1 - my solutions (sol file),
+% me=2 - assignment (hw file)
+\def\me{0} \def\num{12} %homework number
+
+\def\due{5pm on Thursday, December 12} %due date
+
+\def\course{CSCI-GA.1170-001/002 Fundamental Algorithms} 
+%course name, changed only once
+
+% **** INSERT YOUR NAME HERE ****
+\def\name{jingshuai jiang}
+
+% **** INSERT YOUR NETID HERE ****
+\def\netid{jj2903}
+
+% **** INSERT NETIDs OF YOUR COLLABORATORS HERE ****
+\def\collabs{NetID1, NetID2}
+
+
+\iffalse
+
+INSTRUCTIONS: replace # by the homework number.  (if this is not
+ps#.tex, use the right file name)
+
+Clip out the ********* INSERT HERE ********* bits below and insert
+appropriate LaTeX code.  There is a section below for student macros.
+It is not recommended to change any other parts of the code.
+
+
+\fi
+%
+
+\documentclass[11pt]{article}
+
+
+% ==== Packages ====
+\usepackage{amsfonts,amsmath}
+\usepackage{latexsym}
+\usepackage{fullpage}
+\usepackage{graphicx}
+\usepackage{tikz}
+\usepackage[bottom]{footmisc}
+
+
+% \setlength{\oddsidemargin}{.0in} \setlength{\evensidemargin}{.0in}
+% \setlength{\textwidth}{6.5in} \setlength{\topmargin}{-0.4in}
+\setlength{\footskip}{1in} \setlength{\textheight}{8.5in}
+
+\newcommand{\handout}[5]{
+\renewcommand{\thepage}{#1, Page \arabic{page}}
+  \noindent
+  \begin{center}
+    \framebox{ \vbox{ \hbox to 5.78in { {\bf \course} \hfill #2 }
+        \vspace{4mm} \hbox to 5.78in { {\Large \hfill #5 \hfill} }
+        \vspace{2mm} \hbox to 5.78in { {\it #3 \hfill #4} }
+        \ifnum\me=0
+        \vspace{2mm} \hbox to 5.78in { {\it Collaborators: \collabs
+            \hfill} }
+        \fi
+      } }
+  \end{center}
+  \vspace*{4mm}
+}
+
+\newcounter{pppp}
+\newcommand{\prob}{\arabic{pppp}} %problem number
+\newcommand{\increase}{\addtocounter{pppp}{1}} %problem number
+
+% Arguments: Title, Number of Points
+\newcommand{\newproblem}[2]{
+  \ifnum\me=0
+    \ifnum\prob>0 \newpage \fi
+    \increase
+    \setcounter{page}{1}
+    \handout{\name{} (\netid), Homework \num, Problem \arabic{pppp}}
+    {\today}{Name: \name{} (\netid)}{Due: \due}
+    {Solutions to Problem \prob\ of Homework \num\ (#2)}
+  \else
+    \increase
+    \section*{Problem \num-\prob~(#1) \hfill {#2}}
+  \fi
+}
+
+% \newcommand{\newproblem}[2]{\increase
+% \section*{Problem \num-\prob~(#1) \hfill {#2}}
+% }
+
+\def\squarebox#1{\hbox to #1{\hfill\vbox to #1{\vfill}}}
+\def\qed{\hspace*{\fill}
+  \vbox{\hrule\hbox{\vrule\squarebox{.667em}\vrule}\hrule}}
+\newenvironment{solution}{\begin{trivlist}\item[]{\bf Solution:}}
+  {\qed \end{trivlist}}
+\newenvironment{solsketch}{\begin{trivlist}\item[]{\bf Solution
+      Sketch:}} {\qed \end{trivlist}}
+\newenvironment{code}{\begin{tabbing}
+    12345\=12345\=12345\=12345\=12345\=12345\=12345\=12345\= \kill }
+  {\end{tabbing}}
+
+%\newcommand{\eqref}[1]{Equation~(\ref{eq:#1})}
+
+\newcommand{\hint}[1]{({\bf Hint}: {#1})}
+% Put more macros here, as needed.
+\newcommand{\room}{\medskip\ni}
+\newcommand{\brak}[1]{\langle #1 \rangle}
+\newcommand{\bit}[1]{\{0,1\}^{#1}}
+\newcommand{\zo}{\{0,1\}}
+\newcommand{\C}{{\cal C}}
+
+\newcommand{\nin}{\not\in}
+\newcommand{\set}[1]{\{#1\}}
+\renewcommand{\ni}{\noindent}
+\renewcommand{\gets}{\leftarrow}
+\renewcommand{\to}{\rightarrow}
+\newcommand{\assign}{:=}
+
+\newcommand{\AND}{\wedge}
+\newcommand{\OR}{\vee}
+
+\newcommand{\For}{\mbox{\bf for }}
+\newcommand{\To}{\mbox{\bf to }}
+\newcommand{\DownTo}{\mbox{\bf downto }}
+\newcommand{\Do}{\mbox{\bf do }}
+\newcommand{\If}{\mbox{\bf if }}
+\newcommand{\Then}{\mbox{\bf then }}
+\newcommand{\Else}{\mbox{\bf else }}
+\newcommand{\While}{\mbox{\bf while }}
+\newcommand{\Repeat}{\mbox{\bf repeat }}
+\newcommand{\Until}{\mbox{\bf until }}
+\newcommand{\Return}{\mbox{\bf return }}
+\newcommand{\Halt}{\mbox{\bf halt }}
+\newcommand{\Swap}{\mbox{\bf swap }}
+\newcommand{\Ex}[2]{\textrm{exchange } #1 \textrm{ with } #2}
+\newcommand{\Nil}{\mbox{\bf nil }}
+\newcommand{\True}{\mbox{\bf True}}
+\newcommand{\False}{\mbox{\bf False}}
+\begin{document}
+
+\ifnum\me=0
+
+% Collaborators (on a per task basis):
+%
+% Task 1: *********** INSERT COLLABORATORS HERE *********** 
+% Task 2: *********** INSERT COLLABORATORS HERE *********** 
+% etc.
+%
+
+\fi
+
+\ifnum\me=1
+
+\handout{PS \num}{\today}{Lecturer: Yevgeniy Dodis}{Due: \due}
+{Solution {\em Sketches} to Problem Set \num}
+
+\fi
+
+\ifnum\me=2
+
+\handout{PS \num}{\today}{Lecturer: Yevgeniy Dodis}{Due: \due}{Problem
+  Set \num}
+
+\fi
+\newproblem{Avoiding Tolls}{16 points}
+
+\noindent
+You are given a map $G=(V,E)$ with cities $V$ connected by roads $E$.
+Each road (edge) is labeled with a weight which is a \emph{real number}. You are located in city $s\in V$. You are also given an
+array $A$ of boolean values that tells you if there is a toll on that
+road. More precisely, for road $e\in E$ we have $A[e] = 1$ if and only
+if there is a toll on $e$. Being the low budget traveler that you are,
+your budget allows for at most one such toll to be payed for any given
+trip (path).
+
+Let $d(s,t)$ denote the minimum possible sum of weights of a path from $s$ to $t$ for any $s, t \in V$. If there is no path from $s$ to $t$, then $d(s, t) = \infty$, and if there is a path from $s$ to $t$ that contains a negative cycle, then $d(s, t) = - \infty$ (since one can cycle along the path an arbitrary number of times).
+
+Similarly, let $c(s, t)$  denote the minimum possible sum of weights of a path from $s$ to $t$ that passes through at most $1$ toll.
+
+\begin{itemize}
+
+\item[(a)] (6 points) Construct a graph $G' = (V', E')$ and mappings $f: V \mapsto V'$, $g: V \mapsto V'$ such that $|V'| = 2 |V|$, $|E'| \le 2|E| + |V|$ and for any $s, t \in V$, $c(s, t) = d(f(s), g(t))$. Namely, you reduce the ``constrained'' problem on $G$ to ``unconstrained'' problem in $G'$. Remember to consider the case when $c(s, t)$ is $-\infty$, and prove the correctness of your solution. \hint{Use a strategy
+similar to the one used for a previous homework question.}
+\ifnum\me<2
+\begin{solution}   
+\textbf{New graph G':} The vertices in G' is consists of two parts. A and B. Their vertices are the same as vertices in G. If edge in G is connected without a toll. Then draw all these edges in A and B.
+If there is toll edge in G and its two nodes are c and d. Then we draw an edge from A.c to B.d. And do this to all the toll edges.
+Function f will return a vertex in A, g return a vertex in B.
+\textbf{Correctness:}\\[10pt]
+Since both A and B have the same vertices in G. Then obviously the number of vertices in G' is $|V|+|V| = 2|V|$\\[10pt]
+
+The edges in G' is $2|E|-N_a \le 2|E|+|V|$. \\[10pt]
+
+f(s) returns a node in A and g(t) returns a node in B. $c(s, t) = d(f(s), g(t))$ returns the path from a vertex in A to a vertices in B.
+\end{solution}
+\fi
+
+\item[(b)] (3 points) Give an algorithm that takes as input $s$ and finds a shortest
+path with at most one toll road from $s$ to all cities in $V$. Analyze the running time of your algorithm. \hint{Use an algorithm discussed in class.}
+
+\ifnum\me<2
+\begin{solution}
+\textbf{Algorithm:} Construct a graph G' as described in (a).\\[10pt]
+Use Bellman-Ford algorithm to run on (G',s) to assign the shortest path for s to all other vertices.\\[10pt]
+If we detect there is a negative cycle in the bellman-ford algorithm. Then we 
+
+\textbf{Runtime:}
+The runtime of bellman-ford algorithm is $O(VE)$. And the following DFS takes time 
+\end{solution}
+\fi
+
+\item[(c)] (3 points) Now assume your friend who works at a major airlines
+company has given you a free plane ticket to any city in $V$, meaning
+you can start your trip at any node. As before, once you start your
+road trip, you are still refusing to pay more then a single toll on
+any such trip. To help plan the trip, your job is to give an algorithm to find a shortest
+path with at most one toll road between {\em all pairs} of cities in $V$.
+Analyze the running time of your algorithm. \hint{Use another algorithm discussed in 
+class. How many edges are there?}
+
+\ifnum\me<2
+\begin{solution}   
+
+\end{solution}
+\fi
+
+\item[(d)] (4 points) Here you will solve the problem in part (c) directly on graph $G$, without constructing the helper graph $G'$. Let $W = \{w(i,j)\}$ be the original edge weight matrix and $W' = \{w'(i,j)\}$ be the same edge
+    matrix except we replace $w'(i,j)=\infty$ if $A(i,j)=1$ (i.e., never use toll roads in $W'$). For simplicity, assume $W'$ is pre-computed for you. For $0\le k\le n$, let
+ \begin{itemize}
+ \item $D^k$ be the matrix of all shortest distances w.r.t. $W'$ which only use nodes $\le k$ as intermediate nodes.
+ \item $C^k$ be the matrix or all shortest distances w.r.t. $W$ which only use nodes $\le k$ as intermediate nodes, but {\em also use at most one toll}.
+ \end{itemize}
+Fill in the blanks below to directly modify the Floyd-Warshall algorithm to compute the correct answer for problem (c) in time $O(n^3)$. Argue the correctness of your algorithm.
+
+\begin{code}
+{\sc Floyd-Warshall}$(W,W')$\\
+\> $n = W.rows$\\
+\> $D^0 = ......$\\
+\> $C^0 = ......$ \\
+\> \For $k = 1$ \To $n$ \Do \\
+\> \> $C^k = (c_{i,j}^k)$ be a new $n \times n$ matrix\\
+\> \> $D^k = (d_{i,j}^k)$ be a new $n \times n$ matrix\\
+\> \> \For $i = 1 $ \To $n$ \Do\\
+\> \> \> \For $j = 1$ \To $ n$ \Do \\
+\> \> \> \> $d_{i,j}^k = \min \left(....................................................................... \right)$ \\
+\> \> \> \> $c_{i,j}^k = \min \left(....................................................................... \right)$ \\
+\> \Return $.............$
+\end{code}
+
+\ifnum\me<2
+\begin{solution}   INSERT YOUR SOLUTION HERE   \end{solution}
+\fi
+\end{itemize}
+\newproblem{Testing the Tester!}{19+4 points}
+You are the grader for a class evaluating a programming assignment.
+The goal of this assignment is to implement an algorithm ${\sc SSSP}$
+that takes as input a graph $G=(V,E)$ where each edge $e\in E$ 
+has an associated weight $w_e\in\mathbb{R}$, the set of real numbers. 
+Further, $s\in V$ is designated as 
+the source. The algorithm returns the $v.d,v.\pi$ values for
+each $v\in V$.  
+
+You decide to test only one of the submissions, because it looks weird. 
+So, you generate the graph $G=(V,E)$. You run
+the algorithm on this $G$ and get the outputs $v.d,v.\pi$ for each $v$.
+Now, you need to efficiently test if the answers are indeed right.
+To help you, we have given you the algorithm. 
+
+\begin{enumerate}
+\item Verify that $s.d=0$ and $s.\pi=nil$. If fail, output ``wrong''.
+\item Verify that 
+		\begin{enumerate}
+		\item $\forall v\neq s$ such that $v.\pi\neq \Nil$, there exists $(v.\pi,v)\in E$.
+		If fail, output ``wrong''. 
+		\item Else define a parent graph $G'=(V,E')$ such that $E'$ consists of edges
+		of the form $(v.\pi,v)$ for $v\neq s$ and $v.\pi\neq \Nil$. 
+		\item Run {\sc DFS-Visit}$(s)$ on $G'$. Output ``wrong'' if you either
+		reach a node with $v.d=\infty$ or fail to reach a node with $v.d<\infty$. 
+		\end{enumerate}
+\item Verify that for all $v\neq s$ such that $v.d<\infty$, $v.d = v.\pi.d+w(v.\pi,v)$. If fail, output ``wrong''.
+\item Run one pass of the Bellman-Ford algorithm
+(i.e., try to relax each edge of $G$). If any relaxation is
+successful, output ``wrong''.
+\item Otherwise, output ``correct''.
+\end{enumerate}
+\begin{enumerate}
+\item[(a)] (2 points) What is the run time of the above algorithm? Show that
+this algorithm accepts the right answer always.
+\ifnum\me<2
+\begin{solution}   
+for step1 , the runtime is $O(1)$.\\[10pt]
+for step2 , the step (a) will take time$O(|V|)$,for step(bc),for worst cases. The number of edges in the new graph G' is $|E'| = |E|$. Then The DFS will take time $O(|V|+|E|)$\\[10pt]
+for step3 , the runtime for one pass of bellman-ford is $O(|V|)$.\\[10pt]
+for step4 , the runtime is $O(|E|)$.\\[10pt]
+for step5 , the runtime is $O(1)$.\\[10pt]
+The total runtime should be $O(|V|+|E|)$.\\[10pt]
+\textbf{correctness:} for step1, since it is the starting node. its distance should be zero. And had no parent.
+for step2, if $v != s$ then the edge of connecting it to its parent node should be in the edge set of E. Since we are running sssp. Then after the valid solution, we should reach any vertices whose distance is less than infinity. Then step2 is fine.
+for step3, for any reachable node. the walk from their parents to themselves is the shortest path. Then $v.d = v.parent.d+w(v.parent,v)$.
+for step4, since it is already the shortest path. Then after one pass of bellman ford no distance should be updated.
+Then in this way. The algorithm accepts the right answer.
+\end{solution}
+\fi
+\end{enumerate}
+For the next several parts, we will prove the correctness 
+in the opposite direction. More formally, we will prove that
+if the algorithm returns correct, then the answer is indeed right. 
+In part (a), you proved that if the answer is right, the algorithm
+returns ``correct''. 
+
+To prove the converse, let us assume that the answer is wrong. 
+We will then show that one of the checks 1-4 will catch the error
+and consequently return ``wrong''. For simplicity, 
+we will not verify that the parent values are correct when all distances are correct, and instead focus on the case where at least one distance is wrong (with parents being arbitrary). 
+Concretely, assume that there 
+is some node $v\in V$ s.t. $\delta(s,v)\neq v.d$. Clearly, if $v=s$, and $v.d\neq \delta(s,s)=0$, then the first 
+check would catch the error. 
+
+So, we have that $v\neq s$ and we split the proof in four parts. 
+For each case, state which check(s) 2-4 are used in the proofs 
+of the corresponding part.
+\begin{enumerate}
+\item[(b)] (2 points) $\delta(s,v)=\infty$ but $v.d<\infty$. Which check(s) will
+catch this? Justify your answer.
+\ifnum\me<2
+\begin{solution}   
+step 2 checks this problem. if $\delta(s,v)=\infty$, then this node is not reachable from the source node s. Running DFS on this graph from s will lead to a failure to reach this v with $v.d < \infty$.
+\end{solution}
+\fi
+\item[(c)] (3 points) $\delta(s,v)<\infty$ but $v.d=\infty$. Which check(s) will
+catch this? Justify your answer.
+\ifnum\me<2
+\begin{solution}   
+This is checked by step2. If $v.d =\infty$  and $\delta(s,v)<\infty$. By running DFS, i will reach a node v with $v.d = \infty$ which is wrong in 2(c).
+And it can be checked by step3. for all node v. $v.d < \infty$ but this node is not correct.
+\end{solution}
+\fi
+\item[(d)](3 points)  $\delta(s,v)<v.d<\infty$. Which check(s) will catch this? Justify
+your answer.
+\ifnum\me<2
+\begin{solution}   
+This is checked by step4.  if  $\delta(s,v)<v.d<\infty$. Then it means this v.d is not the shortest path. And this edge will be relax in the bellman-ford algorithm. Then it is wrong.
+\end{solution}
+\fi
+\item[(e)]\textbf{(Extra Credit:)}(4 points) $v.d<\delta(s,v)<\infty$.  Which check(s) will catch this? Justify your answer. 
+\ifnum\me<2
+\begin{solution}   INSERT YOUR SOLUTION HERE   \end{solution}
+\fi
+\end{enumerate}
+You now realize that the student's algorithm is indeed correct.
+To make matters easier for future grading, you decide to standardize
+this by creating a set of sample input, output test cases. However, you
+do not want to come up with new graphs. Instead, you decide to reuse
+the same graph as before but merely change the source from $s$ to $s'$.
+Your task is now to come up with an $O(|E|\log|V|)$ algorithm that produces
+the values for the new source $s'$. More formally, you have $v.d$ values
+for $v\in V$ (which is the measure of the shortest path from $s$ to $v$). You will now
+need to compute $v.d'$ (which is the measure of the shortest path
+from $s'$ to $v$). You do not need to compute $v.\pi'$, i.e, the parent node.
+Ideally, one can run Dijkstra's right
+off the bat but weights can be negative. 
+\begin{enumerate}
+\item[(f)](3 points) You will construct a new graph $G'$ 
+with different edge weights. You will use the values of $v.d$ which the
+student's algorithm has generated and your algorithm has verified. Let $w_e'$ be the new edge weight of an
+edge $e=(u,v)$ and $w_e$ be the weight in graph $G$. What is the new $w_e'$?
+Fill in the blank below. Also, argue that $w_e'\geq 0$. 
+\hint{Use ideas of Johnson's algorithm to define the new edge weight, which
+must be non-negative.}
+\[
+w_e'=\underline{~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~}
+\]
+\ifnum\me<2
+\begin{solution}   INSERT YOUR SOLUTION HERE   \end{solution}
+\fi
+\item[(g)] (3 points) Formally, let $P$ be the min-cost
+path from $s'$ to an arbitrary node $x$. Let $w(P)$ denote the 
+cost of $P$ under $w$ and $w'(P)$ denote the cost under $w'$. Fill
+in the blanks below for $w'(P)$. Justify the correctness of your equation.
+Use this equation to argue that the min-cost path in $G$ is 
+not affected by the new weights. 
+\[
+w'(P)=w(P)+\underline{~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~}
+\]
+\ifnum\me<2
+\begin{solution}   INSERT YOUR SOLUTION HERE   \end{solution}
+\fi
+\item[(h)] (3 points) Finally, put the last two parts together to construct
+an algorithm that takes as input $G$ and the correct values from the student's
+algorithm to produce the shortest distance to $s'$. 
+Argue why your running time is $O(|E|\log |V|)$. You can write this in words.
+\hint{Use Dijkstra, as alluded to earlier.}
+\ifnum\me<2
+\begin{solution}   INSERT YOUR SOLUTION HERE   \end{solution}
+\fi
+\end{enumerate}
+\end{document}
+
+

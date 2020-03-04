@@ -1,0 +1,441 @@
+% me=0 student solutions (ps file), me=1 - my solutions (sol file),
+% me=2 - assignment (hw file)
+\def\me{0} \def\num{3} %homework number
+
+\def\due{5pm on Thursday, September 26} %due date
+
+\def\course{CSCI-GA.1170-001/002 Fundamental Algorithms} 
+%course name, changed only once
+
+% **** INSERT YOUR NAME HERE ****
+\def\name{jingshuai jiang}
+
+% **** INSERT YOUR NETID HERE ****
+\def\netid{jj2903}
+
+% **** INSERT NETIDs OF YOUR COLLABORATORS HERE ****
+\def\collabs{NetID1, NetID2}
+
+
+\iffalse
+
+INSTRUCTIONS: replace # by the homework number.  (if this is not
+ps#.tex, use the right file name)
+
+Clip out the ********* INSERT HERE ********* bits below and insert
+appropriate LaTeX code.  There is a section below for student macros.
+It is not recommended to change any other parts of the code.
+
+
+\fi
+%
+
+\documentclass[11pt]{article}
+
+
+% ==== Packages ====
+\usepackage{amsfonts,amsmath}
+\usepackage{latexsym}
+\usepackage{fullpage}
+\usepackage{graphicx}
+\usepackage[bottom]{footmisc}
+\usepackage{listings}
+\usepackage{xcolor}
+
+\lstset{
+ columns=fixed,       
+ numbers=left,                                        % 在左侧显示行号
+ numberstyle=\tiny\color{gray},                       % 设定行号格式
+ frame=none,                                          % 不显示背景边框
+ backgroundcolor=\color[RGB]{245,245,244},            % 设定背景颜色
+ keywordstyle=\color[RGB]{40,40,255},                 % 设定关键字颜色
+ numberstyle=\footnotesize\color{darkgray},           
+ commentstyle=\it\color[RGB]{0,96,96},                % 设置代码注释的格式
+ stringstyle=\rmfamily\slshape\color[RGB]{128,0,0},   % 设置字符串格式
+ showstringspaces=false,                              % 不显示字符串中的空格
+ language=java,                                        % 设置语言
+}
+
+
+% \setlength{\oddsidemargin}{.0in} \setlength{\evensidemargin}{.0in}
+% \setlength{\textwidth}{6.5in} \setlength{\topmargin}{-0.4in}
+\setlength{\footskip}{1in} \setlength{\textheight}{8.5in}
+
+\newcommand{\handout}[5]{
+\renewcommand{\thepage}{#1, Page \arabic{page}}
+  \noindent
+  \begin{center}
+    \framebox{ \vbox{ \hbox to 5.78in { {\bf \course} \hfill #2 }
+        \vspace{4mm} \hbox to 5.78in { {\Large \hfill #5 \hfill} }
+        \vspace{2mm} \hbox to 5.78in { {\it #3 \hfill #4} }
+        \ifnum\me=0
+        \vspace{2mm} \hbox to 5.78in { {\it Collaborators: \collabs
+            \hfill} }
+        \fi
+      } }
+  \end{center}
+  \vspace*{4mm}
+}
+
+
+\newcounter{pppp}
+\newcommand{\prob}{\arabic{pppp}} %problem number
+\newcommand{\increase}{\addtocounter{pppp}{1}} %problem number
+
+% Arguments: Title, Number of Points
+\newcommand{\newproblem}[2]{
+  \ifnum\me=0
+    \ifnum\prob>0 \newpage \fi
+    \increase
+    \setcounter{page}{1}
+    \handout{\name{} (\netid), Homework \num, Problem \arabic{pppp}}
+    {\today}{Name: \name{} (\netid)}{Due: \due}
+    {Solutions to Problem \prob\ of Homework \num\ (#2)}
+  \else
+    \increase
+    \section*{Problem \num-\prob~(#1) \hfill {#2}}
+  \fi
+}
+
+% \newcommand{\newproblem}[2]{\increase
+% \section*{Problem \num-\prob~(#1) \hfill {#2}}
+% }
+
+\def\squarebox#1{\hbox to #1{\hfill\vbox to #1{\vfill}}}
+\def\qed{\hspace*{\fill}
+  \vbox{\hrule\hbox{\vrule\squarebox{.667em}\vrule}\hrule}}
+\newenvironment{solution}{\begin{trivlist}\item[]{\bf Solution:}}
+  {\qed \end{trivlist}}
+\newenvironment{solsketch}{\begin{trivlist}\item[]{\bf Solution
+      Sketch:}} {\qed \end{trivlist}}
+\newenvironment{code}{\begin{tabbing}
+    12345\=12345\=12345\=12345\=12345\=12345\=12345\=12345\= \kill }
+  {\end{tabbing}}
+
+%\newcommand{\eqref}[1]{Equation~(\ref{eq:#1})}
+
+\newcommand{\hint}[1]{({\bf Hint}: {#1})}
+% Put more macros here, as needed.
+\newcommand{\room}{\medskip\ni}
+\newcommand{\brak}[1]{\langle #1 \rangle}
+\newcommand{\bit}[1]{\{0,1\}^{#1}}
+\newcommand{\zo}{\{0,1\}}
+\newcommand{\C}{{\cal C}}
+
+\newcommand{\nin}{\not\in}
+\newcommand{\set}[1]{\{#1\}}
+\renewcommand{\ni}{\noindent}
+\renewcommand{\gets}{\leftarrow}
+\renewcommand{\to}{\rightarrow}
+\newcommand{\assign}{:=}
+
+\newcommand{\AND}{\wedge}
+\newcommand{\OR}{\vee}
+
+\newcommand{\For}{\mbox{\bf for }}
+\newcommand{\To}{\mbox{\bf to }}
+\newcommand{\Do}{\mbox{\bf do }}
+\newcommand{\If}{\mbox{\bf if }}
+\newcommand{\Then}{\mbox{\bf then }}
+\newcommand{\Else}{\mbox{\bf else }}
+\newcommand{\While}{\mbox{\bf while }}
+\newcommand{\Repeat}{\mbox{\bf repeat }}
+\newcommand{\Until}{\mbox{\bf until }}
+\newcommand{\Return}{\mbox{\bf return }}
+\newcommand{\Halt}{\mbox{\bf halt }}
+\newcommand{\Swap}{\mbox{\bf swap }}
+\newcommand{\Ex}[2]{\textrm{exchange } #1 \textrm{ with } #2}
+
+
+
+\begin{document}
+
+\ifnum\me=0
+
+% Collaborators (on a per task basis):
+%
+% Task 1: *********** INSERT COLLABORATORS HERE *********** 
+% Task 2: *********** INSERT COLLABORATORS HERE *********** 
+% etc.
+%
+
+\fi
+
+\ifnum\me=1
+
+\handout{PS \num}{\today}{Lecturer: Yevgeniy Dodis}{Due: \due}
+{Solution {\em Sketches} to Problem Set \num}
+
+\fi
+
+\ifnum\me=2
+
+\handout{PS \num}{\today}{Lecturer: Yevgeniy Dodis}{Due: \due}{Problem
+  Set \num}
+
+\fi
+
+\newproblem{Recurrences and Matrix Exponentiation}{24  points}
+
+\noindent
+The sequence $\{F_n\mid n\ge 0\}$ are defined as follows: $F_0
+= 1$, $F_1 = 1$, $F_2 = 2$ and, for $i > 2$, define $F_i := F_{i-1} + F_{i-2} + 2 F_{i-3}$.
+
+\begin{itemize}
+\item[(a)] (2 Points)  We can think of the above recurrence relation as a matrix equation. More specifically, the relation can be represented as an equation of the following form:
+$$\label{eq:1}\mathbf{A} \cdot \left(
+\begin{array}{c} F_i \\ F_{i-1} \\ F_{i-2} \end{array} \right) = \left(
+\begin{array}{c} F_{i+1} \\ F_i \\ F_{i-1} \end{array} \right)
+$$
+What is the satisfying value of $\mathbf{A}$? \hint{Consider the simpler case of a Fibonacci Sequence, i.e, $F_i:=F_{i-1}+F_{i-2}$ for $i>1$ and $F_0=0,F_1=1$. How would you set up the matrix equation?}
+\ifnum\me<2
+\begin{solution}   
+  $\mathbf{A}$ = 
+  \[\left[ \begin{array}{ccc}
+    1 & 1 & 2\\
+    1 & 0 & 0\\
+    0 & 1 & 0
+    \end{array} 
+    \right ]\]
+   \end{solution}
+\fi
+\item[(b)] (6 Points)  Use the equation from part (a) and the ideas of fast $O(\log n)$ time
+exponentiation to build an efficient algorithm for computing
+$F_n$. Analyze it's runtime in terms of the number of $3\times 3$
+matrix multiplications performed (each of which takes a constant number of integer
+additions/multiplications).
+
+\ifnum\me<2
+\begin{solution}   
+
+   \end{solution}
+\fi
+
+\item[(c)] (6 Points) Prove by induction that, for some constant
+$a>1$, $F_n = \Theta(a^n)$. Namely, prove by induction that for some constant $c_1$ you have
+$F_n \le c_1\cdot a^n$, and for some constant $c_2$ you have
+$F_n \ge c_2\cdot a^n$. Thus, $F_n$ takes $O(n)$ bits to represent. What
+is the right constant $a$ and the best $c_1$ and $c_2$ you can find. \hint{Pay attention to the base
+case $n=0,1,2$. Also, you need to do {\em two} very similar inductive proofs.}
+
+\ifnum\me<2
+\begin{solution}  
+  \\[10pt] Conclusion $c_1=1,a=2,c_2=\frac{1}{2}$
+  $$F_n \le c_1\cdot a^n$$ then $$F_0=1 \le C_1\cdot a^0, F_1 = 1 \le C_1 \cdot a^1,F_2 = 2 \le C_1 \cdot a^2 $$ 
+  then we get that $$C_1 \ge 1,1 \le C_1 \cdot a^1 and 2 \le C_1 \cdot a^2$$
+  
+  assume it is true for $F_{n-1}$
+  then $$F_n = F_{n-1}+F_{n-2}+2F_{n-3} \le C_1\cdot a^{n-1} +C_1\cdot a^{n-2}+2\cdot C_1 \cdot a^{n-3} \le C_1 \cdot a^n $$ 
+  then we get $$(a-2)\cdot (a^2-a+1)\ge 0$$ and we get $a\ge 2$
+  \\[10pt]
+  \\[10pt]
+  \\[10pt]
+  $$F_n \ge c_2\cdot a^n$$ then $$F_0=1 \ge C_2\cdot a^0, F_1 = 1 \ge C_2 \cdot a^1,F_2 = 2 \ge C_2 \cdot a^2 $$ 
+  then we get that $$C_2 \le 1,1 \ge C_2 \cdot a^1,2 \ge C_2 \cdot a^2$$
+  
+  assume it is true for $F_{n-1}$
+ then $$F_n = F_{n-1}+F_{n-2}+2F_{n-3} \ge C_2\cdot a^{n-1} +C_2\cdot a^{n-2}+2\cdot C_2 \cdot a^{n-3} \ge C_2 \cdot a^n $$ 
+  then we get $$(a-2)\cdot (a^2-a+1)\le 0$$ and we get $a\le 2$
+  
+ \\[10pt]
+  since $a=2$ then we get $C_1 \ge 2$ and $C_2 \le \frac{1}{2}$ 
+  then we get $c_1=1,a=2,c_2=\frac{1}{2}$
+   \end{solution}
+\fi
+
+\item[(d)] (6 points) In your algorithm of part (b) you only counted
+the number of $3\times 3$ matrix multiplications. However, the
+integers used to compute $(F_i,F_{i-1}, F_{i-2})$ are $O(i)$
+(in fact, $\Theta(i)$) bits long, by part (b). Thus,  the $3\times 3$ matrix
+multiplication used at that level of recursion will not take $O(1)$ time. In fact,
+using Karatsuba's multiplication, let us assume that the last matrix multiplication you
+use to  compute $(F_i,F_{i-1}, F_{i-2})$ takes time $O(i^{\log_2 3})$. Given this more realistic estimate, analyze the actual running time $T(n)$ of your algorithm in part (b).
+
+\ifnum\me<2
+\begin{solution}   INSERT YOUR SOLUTION HERE   \end{solution}
+\fi
+
+\item[(e)] (4 points) Finally, let us look at the naive sequential algorithm which computes $F_3,F_4,\ldots, F_n$ one-by-one.
+ Assuming each $F_i$ takes $\Theta(i)$ bits to represent, and that integer addition/subtraction takes time $O(i)$ (multiplication by two can be implemented by addition),
+analyze the actual running time of the naive algorithm. How does it compare to your answer in part (d)?
+
+\ifnum\me<2
+\begin{solution}   INSERT YOUR SOLUTION HERE   \end{solution}
+\fi
+
+\end{itemize}
+
+
+
+\newproblem{Min-Max using Divide and Conquer} {8 Points}
+
+\noindent
+Find a {\em divide-and-conquer} algorithm that finds the maximum and
+the minimum of an array of size $n$ using at most $3n/2$
+\emph{comparisons} (between elements of the array).  (Note that we are
+not asking for an iterative algorithm.  We are asking for you to {\em
+  explicitly use recursion}.)  Derive an \emph{exact} recurrence for
+the number of \emph{comparisons} of your algorithm and prove it using
+induction.
+
+\noindent
+\hint{Your conquer step should make a constant number of comparisons.
+  Be careful for what $n$ you stop recursing.}
+
+\ifnum\me<2
+\begin{solution}  
+ \end{solution}
+\fi
+
+
+
+
+\newproblem{Rotation-Sorted Arrays}{12 points}
+
+\noindent
+An array $A[0\ldots (n-1)]$ is called {\em rotation-sorted} if there exists some some cyclic shift $0\le c< n$ such that $A[i] = B[(i+c \bmod n)]$ for all $0\le i<n$, where $B[0\ldots (n-1)]$ is the sorted version of $A$.\footnote{Intuitively, $A$ is either completely sorted (if $c=0$), or (if $c>0$) $A$ starts in sorted order, but then ``falls off the cliff'' when going from $A[n-c-1]=B[n-1]=\max$ to $A[n-c]=B[0]=\min$, and then again goes in increasing order while never reaching $A[0]$.} For example, $A=(2,3,4,7,1)$ is rotation-sorted, since the sorted array $B = (1,2,3,4,7)$ is the cyclic shift of $A$ with $c=1$ (e.g. $1=A[4] = B[(4+1) \bmod 5] = B[0]=1$). For simplicity, below let us assume that $n$ is a power of two (so that can ignore floors and ceilings), and that all elements of $A$ are distinct.
+
+\begin{itemize}
+\item[(a)] (4 points)
+ Prove that if $A$ is rotation-sorted, then one of $A[0\ldots (n/2-1)]$ and $A[n/2 \ldots (n-1)]$ is fully sorted (and, hence, also rotation-sorted with $c=0$), while the other is at least rotation-sorted. What determines which one of the two halves is sorted? Under what condition {\em both halves} of $A$ are sorted?
+
+\ifnum\me<2
+\begin{solution}   
+   Since A is roatation-sorted, then exits some C that $A[i] = B[(i+c \bmod n)]$
+   \\[10pt] if $0\le c \le \frac{n}{2}$ then $A[0\ldots (n/2-1)]$ = $B[c\ldots \frac{n}{2}-1+c]$ since B is fully sorted, and $0\le c \le \frac{n}{2}$ then $c\ldots \frac{n}{2}-1+c$ is consecutive which means $A[0\ldots (n/2-1)]$ is fully sorted.
+   \\[10pt] 
+   \\[10pt] the value of c determines which part is sorted. if $0\le c \le \frac{n}{2}$ then the first part is sorted. if $ \frac{n}{2} \le c \le n$ the second part is fully sorted.
+   \\[10pt] if $c=0 $ or $c=\frac{n}{2}$ then they will all be sorted.
+   \end{solution}
+\fi
+
+\item[(b)] (8 points)
+Assume again that $A$ is rotation-sorted, but you are not given the cyclic shift $c$. Design a divide-and-conquer algorithm to compute the minimum of $A$ (i.e., $B[0]$). Carefully prove the correctness of your algorithm, write the recurrence equation for its running time, and solve it. Is it better than the trivial $O(n)$ algorithm? \hint{Be careful with $c=0$ an $c=n/2$; you might need to handle them separately.}
+
+\ifnum\me<2
+\begin{solution}  
+  algorithm:
+  \clearpage
+  \begin{lstlisting}
+    public int Min(int start,int end, int[] a)
+    {
+        int n=a.length;
+        if(a[0]<a[n-1]) return a[0];
+        if(a[n/2-1]>a[n/2]) return a[n/2];
+        if(a[start]<a[end]) return a[start];
+        if(a[start]>a[(start+end)/2-1]) return Min(start,(start+end)/2-1,a);
+        else return Min((start+end)/2,end,a);
+    }
+    \end{lstlisting}
+    $$T(n) = T(\frac{n}{2})+O(1)=O(log n)$$
+    it is better than the trivial $O(n)$ algorithm
+\fi
+\end{itemize}
+
+
+\newproblem{Grid local minimum}{18 points}
+
+\noindent
+A {\em local minimum} of a \underline{two-dimensional} array $\{A[i,j] \mid 1\le i,j\le n\}$ is an index $(i,j)\in \{1,\ldots,n\}\times \{1,\ldots,n\}$ which is less or equal than all of its neighbors, where 
+we say that two nodes are neighboring if they are either vertically or horizontally (but not diagonally) adjacent in the array. Note that every array has at least (and possibly
+more than) one local minimum, since the ``global'' minimum of the
+entire array is also a local minimum. The eventual goal of this problem is to design an efficient divide-and-conquer algorithm to find some local minimum of a given (unsorted) array $A$ of size $n\times n$. 
+\begin{itemize}
+
+\item[(a)] (2 points) Consider the following ``greedy'' algorithm. Start with any node $v=(i,j)$. If $v$ is a local minimum, then output $v$. Else take the smallest neighbor of $v$ (break ties arbitrarily) and repeat the above process with the neighbor until you find a local minimum. Prove that this algorithm always terminates in time $O(n^2)$.
+ 
+
+\ifnum\me<2
+\begin{solution}   INSERT YOUR SOLUTION HERE   \end{solution}
+\fi
+
+\item[(b)] (3 points) What is the exact length (number of nodes, not ``edges'') of the ``local minimum path'' of the greedy algorithm on the following $7\times 7$ grid, starting with the initial point $v=(1,1)$ (equal to $30$). By generalizing this picture from $n=7$ to general $n$, show that the worst case running time of the greedy algorithm is $\Omega(n^2)$.
+
+\[ \left( \begin{array}{ccccccc}
+30 & 100 & 16 & 15 & 14 & 100 &0 \\
+29 & 100 & 17 & 100 & 13 & 100 &1\\
+28 & 100 & 18 & 100 & 12 & 100 &2 \\
+27 & 100 & 19 & 100 & 11 & 100 &3\\
+26 & 100 & 20 & 100 & 10 & 100 &4\\
+25 & 100 & 21 & 100 & 9& 100 &5 \\
+24 & 23 & 22 & 100 & 8 & 7 & 6
+\end{array} \right)\]
+
+\ifnum\me<2
+\begin{solution}  
+  \\[10pt] the length is $31$
+  \[ \left( \begin{array}{cccccccc}
+    big number & \infty & 16 & 15 & 14 & \rightarrow&\infty &small number\\
+    big number-1 & \infty & 17 & \infty & 13 & \rightarrow&\infty &small number+1\\
+    \downarrow & \downarrow & \downarrow & \downarrow &\downarrow & \rightarrow &\downarrow &\downarrow\\
+    28 & \infty & 18 & \infty & 12 & \rightarrow&\infty &2 \\
+    27 & \infty & 19 & \infty & 11 & \rightarrow&\infty &3\\
+    26 & \infty & 20 & \infty & 10 & \rightarrow&\infty &4\\
+    25 & \infty & 21 & \infty & 9& \rightarrow&\infty &5 \\
+    24 & 23 & 22 & \infty & 8 & \rightarrow&7 & 6
+    \end{array} \right)\]
+    \\[10pt]
+    the symbol $\infty$ here represents some very big numbers larger than the others and the numbers outside the symbol $\infty$ is just some numbers that help we explain.
+    \\[10pt]
+    by arranging the matrix like this we can get that if n is an odd,then the time will be $$T(n) = \frac{n^2-1+2n}{2}$$
+    if n is an even ,then the time will be $$\frac{n(n+1)}{2}$$
+    by showing the worst case ,it can be conclude that their running time is $\Omega(n^2)$.
+   \end{solution}
+\fi
+
+\item[(c)] (3 points) For simplicity of calculation, assume that $n = 2^k - 1$  for some integer $k\ge 1$. Consider the following divide-and-conquer algorithm: at every step, find the minimum element $v$ of the middle row $2^{k-1}$ and the middle column $2^{k-1}$. If $v$ is a local minimum, output $v$. Else take the smallest neighbor of $v$ (call it $w$), and recurse in the quadrant (north-east, north-west, south-east or south-west) of $A$ of size $(n-1)/2 = (2^{k-1} -1)$ where $w$ lies (not counting the middle row/column in the quadrant, so one row/column is eliminated before dividing by $2$).
+
+While this algorithm looks appealing, you will prove that it is {\em not} correct in general. 
+For this, consider the following grid containing all the numbers from $1$ to $49$ exactly once, except three weights $10, 31, 39$ are marked with the $?$. Fill the missing numbers marked with $?$ with $10,31,39$ in a way such that the algorithm given above gives the wrong answer, and state what this wrong answer is.
+
+\[ \left( \begin{array}{ccccccc}
+45 & 48 & ? & 20 & ? & ? & 32 \\
+42 & 41 & 47 & 30 & 36 & 34 & 37\\
+46 & 43 & 44 & 40 & 38 & 33 & 35 \\
+21 & 22 & 23 & 24 & 25 & 26 & 49\\
+2 & 3 & 9 & 27 & 13 & 12 & 16\\
+4 & 1 & 8 & 28 & 11 & 15 & 19 \\
+5 & 6 & 7 & 29 & 14 & 17 & 18
+\end{array} \right)\]
+
+
+\ifnum\me<2
+\begin{solution}   
+  \[ \left( \begin{array}{ccccccc}
+    45 & 48 & 31 & 20 & 10 &39 & 32 \\
+    42 & 41 & 47 & 30 & 36 & 34 & 37\\
+    46 & 43 & 44 & 40 & 38 & 33 & 35 \\
+    21 & 22 & 23 & 24 & 25 & 26 & 49\\
+    2 & 3 & 9 & 27 & 13 & 12 & 16\\
+    4 & 1 & 8 & 28 & 11 & 15 & 19 \\
+    5 & 6 & 7 & 29 & 14 & 17 & 18
+    \end{array} \right)\]
+   \end{solution}
+\fi
+
+\item[(d)] (8 points) For simplicity of calculation, assume that $n = 2^k + 1$  for some integer $k\ge 0$ and all the numbers $A[i,j]$ are distinct.
+    Consider a slightly more complex divide-and-conquer algorithm.
+In addition to the middle row $(2^{k-1}+1)$ and column $(2^{k-1}+1)$, also look at the boundary nodes $\{(1,i), (n,i), (i,1), (i,n)\mid i=1\ldots n\}$, and find the global minimum $a$ (located at node $v$ of all these $6n-9$ numbers (3 rows and 3 columns of size $n$, except 9 ``intersection points'' are counted twice) in $O(n)$ time. If $v$ is a local minimum, output $v$. Else take the smallest neighbor of $v$ (call it $w$), and recurse in the quadrant (north-east, north-west, south-east or south-west) of $A$ of size $(n+1)/2 = 2^{k-1} +1$ (where the quadrant {\em includes the boundary}, so you effectively duplicate the middle row/colum before dividing by $2$) where $w$ lies.
+    
+Prove the correctness of this modified algorithm. To do that, prove the following stronger inductive statement: the algorithm computes an answer which is (a) correct local minimum $(i,j)$ {\em and} (b) $A[i,j]$ is less or equal than every number on the boundary of the square. Make sure you stress where (i) you use the fact that a {\em smaller} neighbor $w$ is selected; (ii) that all the numbers are {\em distinct}.
+
+\ifnum\me<2
+\begin{solution}   INSERT YOUR SOLUTION HERE   \end{solution}
+\fi
+\item[(e)] (2 points)
+Write the recurrence equation and solve it to compute the running time of the algorithm in part (d).
+
+\ifnum\me<2
+\begin{solution}   
+  $$T(n) = T(\frac{n}{2})+cn$$
+  $$T(n) = T(\frac{n}{4})+c\frac{n}{2}+cn$$
+  $$T(n) = T(1)+cn(1+\frac{1}{2}+\frac{1}{4}+\frac{1}{8}.....) = O(n)$$
+   \end{solution}
+\fi
+
+\end{itemize}
+
+
+\end{document}
+
+

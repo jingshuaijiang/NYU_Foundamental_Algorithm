@@ -1,0 +1,300 @@
+% me=0 student solutions (ps file), me=1 - my solutions (sol file),
+% me=2 - assignment (hw file)
+\def\me{0} \def\num{1} %homework number
+
+\def\due{5 pm on Thursday, September 12} %due date
+
+\def\course{CSCI-GA.1170-001/002 Fundamental Algorithms} 
+%course name, changed only once
+
+% **** INSERT YOUR NAME HERE ****
+\def\name{Jingshuai Jiang}
+
+% **** INSERT YOUR NETID HERE ****
+\def\netid{jj2903}
+
+% **** INSERT NETIDs OF YOUR COLLABORATORS HERE ****
+\def\collabs{NetID1, NetID2}
+
+
+\iffalse
+
+INSTRUCTIONS: replace # by the homework number.  (if this is not
+ps#.tex, use the right file name)
+
+Clip out the ********* INSERT HERE ********* bits below and insert
+appropriate LaTeX code.  There is a section below for student macros.
+It is not recommended to change any other parts of the code.
+
+
+\fi
+%
+
+\documentclass[11pt]{article}
+
+
+% ==== Packages ====
+\usepackage{amsfonts}
+\usepackage{latexsym}
+\usepackage{fullpage}
+
+% \setlength{\oddsidemargin}{.0in} \setlength{\evensidemargin}{.0in}
+% \setlength{\textwidth}{6.5in} \setlength{\topmargin}{-0.4in}
+\setlength{\footskip}{1in} \setlength{\textheight}{8.5in}
+
+\newcommand{\handout}[5]{
+\renewcommand{\thepage}{#1, Page \arabic{page}}
+  \noindent
+  \begin{center}
+    \framebox{ \vbox{ \hbox to 5.78in { {\bf \course} \hfill #2 }
+        \vspace{4mm} \hbox to 5.78in { {\Large \hfill #5 \hfill} }
+        \vspace{2mm} \hbox to 5.78in { {\it #3 \hfill #4} }
+        \ifnum\me=0
+        \vspace{2mm} \hbox to 5.78in { {\it Collaborators: \collabs
+            \hfill} }
+        \fi
+      } }
+  \end{center}
+  \vspace*{4mm}
+}
+
+\newcounter{pppp}
+\newcommand{\prob}{\arabic{pppp}} %problem number
+\newcommand{\increase}{\addtocounter{pppp}{1}} %problem number
+
+% Arguments: Title, Number of Points
+\newcommand{\newproblem}[2]{
+  \ifnum\me=0
+    \ifnum\prob>0 \newpage \fi
+    \increase
+    \setcounter{page}{1}
+    \handout{\name{} (\netid), Homework \num, Problem \arabic{pppp}}
+    {\today}{Name: \name{} (\netid)}{Due: \due}
+    {Solutions to Problem \prob\ of Homework \num\ (#2)}
+  \else
+    \increase
+    \section*{Problem \num-\prob~(#1) \hfill {#2}}
+  \fi
+}
+
+% \newcommand{\newproblem}[2]{\increase
+% \section*{Problem \num-\prob~(#1) \hfill {#2}}
+% }
+
+\def\squarebox#1{\hbox to #1{\hfill\vbox to #1{\vfill}}}
+\def\qed{\hspace*{\fill}
+  \vbox{\hrule\hbox{\vrule\squarebox{.667em}\vrule}\hrule}}
+\newenvironment{solution}{\begin{trivlist}\item[]{\bf Solution:}}
+  {\qed \end{trivlist}}
+\newenvironment{solsketch}{\begin{trivlist}\item[]{\bf Solution
+      Sketch:}} {\qed \end{trivlist}}
+\newenvironment{code}{\begin{tabbing}
+    12345\=12345\=12345\=12345\=12345\=12345\=12345\=12345\= \kill }
+  {\end{tabbing}}
+
+\newcommand{\eqref}[1]{Equation~(\ref{eq:#1})}
+
+\newcommand{\hint}[1]{({\bf Hint}: {#1})}
+% Put more macros here, as needed.
+\newcommand{\room}{\medskip\ni}
+\newcommand{\brak}[1]{\langle #1 \rangle}
+\newcommand{\bit}[1]{\{0,1\}^{#1}}
+\newcommand{\zo}{\{0,1\}}
+\newcommand{\C}{{\cal C}}
+
+\newcommand{\nin}{\not\in}
+\newcommand{\set}[1]{\{#1\}}
+\renewcommand{\ni}{\noindent}
+\renewcommand{\gets}{\leftarrow}
+\renewcommand{\to}{\rightarrow}
+\newcommand{\assign}{:=}
+
+\newcommand{\AND}{\wedge}
+\newcommand{\OR}{\vee}
+
+\newcommand{\For}{\mbox{\bf for }}
+\newcommand{\To}{\mbox{\bf to }}
+\newcommand{\Do}{\mbox{\bf do }}
+\newcommand{\If}{\mbox{\bf if }}
+\newcommand{\Then}{\mbox{\bf then }}
+\newcommand{\Else}{\mbox{\bf else }}
+\newcommand{\While}{\mbox{\bf while }}
+\newcommand{\Repeat}{\mbox{\bf repeat }}
+\newcommand{\Until}{\mbox{\bf until }}
+\newcommand{\Return}{\mbox{\bf return }}
+\newcommand{\Halt}{\mbox{\bf halt }}
+\newcommand{\Swap}{\mbox{\bf swap }}
+\newcommand{\Ex}[2]{\textrm{exchange } #1 \textrm{ with } #2}
+
+
+
+\begin{document}
+
+\ifnum\me=0
+
+% Collaborators (on a per task basis):
+%
+% Task 1: *********** INSERT COLLABORATORS HERE *********** 
+% Task 2: *********** INSERT COLLABORATORS HERE *********** 
+% etc.
+%
+
+\fi
+
+\ifnum\me=1
+
+\handout{PS \num}{\today}{Lecturer: Yevgeniy Dodis}{Due: \due}
+{Solution {\em Sketches} to Problem Set \num}
+
+\fi
+
+\ifnum\me=2
+
+\handout{PS \num}{\today}{Lecturer: Yevgeniy Dodis}{Due: \due}{Problem
+  Set \num}
+
+\fi
+
+
+
+\newproblem{Asymptotic Comparisons}{10 Points}
+
+\noindent
+For each of the following pairs of functions $f(n)$ and $g(n)$, state
+whether $f$ is $O(g)$; whether $f$ is $o(g)$; whether $f$ is
+$\Theta(g)$; whether $f$ is $\Omega(g)$; and whether $f$ is
+$\omega(g)$.  (More than one of these can be true for a single pair!)
+
+\begin{itemize}
+  \item[(a)] $f(n) = n!$; \quad
+  $g(n) = (n+1)!$.
+
+  \ifnum\me<2
+\begin{solution}   INSERT YOUR SOLUTION HERE   \end{solution}
+  \fi
+
+   \item[(b)] $f(n) =n^{\log_2 c}$; \quad $g(n) = c^{\log_2 n}$.
+
+  \ifnum\me<2
+\begin{solution}   INSERT YOUR SOLUTION HERE   \end{solution}
+  \fi
+
+  \item[(c)] $f(n) = \log(n^5+5n^4+4n^3+3n^2+2n+1)$; \quad
+  $g(n) = \log(n^{10}+n^8+n^6+n^4+n^2+100$.
+
+  \ifnum\me<2
+\begin{solution}   INSERT YOUR SOLUTION HERE   \end{solution}
+  \fi
+
+  \item[(d)] $f(n) = \frac{3^n}{n+n\log n}$; \quad
+  $g(n) =9^{\sqrt{n}}$.
+
+  \ifnum\me<2
+\begin{solution}   INSERT YOUR SOLUTION HERE  \end{solution}
+  \fi
+
+  \item[(e)] $f(n) = 2^{\sqrt{\log_2 n}}$; \quad $g(n)=n^{1/3}$.
+
+  \ifnum\me<2
+\begin{solution}   INSERT YOUR SOLUTION HERE   \end{solution}
+  \fi
+
+\end{itemize}
+
+\newproblem{Order of Growth}{12 Points}
+
+\begin{itemize}
+  \item[(a)] (8 Points) For each of the following functions $f(n)$,
+  find a ``canonical'' function\footnote{I.e., function of the form
+    $a^n n^b \log^c n$ for constants $a\ge 1$ and $b,c\ge 0$.}  $g(n)$
+  such that $f(n) = \Theta(g(n))$. For example,
+  $3200n + 2n^2 \log^{24} (n^2) = \Theta(n^2\log^{24} n)$. Briefly
+  justify your answers (and I mean {\em briefly}).
+\end{itemize}
+$$3^n + 7 n^{73},~~3^{n+\log_3 n},~~\log(n^{34} + 5),~~2^{2n},
+~~\sqrt{n^5+30n^4},~~~ \frac{n^4 - 5n}{55555},~~\log^2 n + 33,~~n^2
+\log^3 n + n^3 \log^2 n$$
+
+\ifnum\me<2
+\begin{solution}   INSERT YOUR SOLUTION HERE   \end{solution}
+\fi
+\begin{itemize}
+  \item[(b)] (4 Points) Based on your answers in part (a), sort the
+  resulting ``canonical'' (not original)\footnote{Thsi way even if you
+    got part (a) wrong, you can still have correct solution to part
+    (b).}  functions in asymptotically increasing order.
+\end{itemize}
+\ifnum\me<2
+\begin{solution}   INSERT YOUR SOLUTION HERE   \end{solution}
+\fi
+
+
+
+\newproblem{Insertion Sort and Inversions}{16 points}
+
+\noindent
+Let $A[1, \ldots, n]$ be an array of $n$ distinct numbers.  If $i < j$
+and $A[i] > A[j]$, then the pair $(i,j)$ is called an \emph{inversion}
+of $A$.
+
+\begin{itemize}
+
+  \item[(a)] (2 points) List all inversions of the array
+  $\langle 8,5,2,7,9 \rangle$.
+
+  \ifnum\me<2
+  \begin{solution}
+    INSERT YOUR SOLUTION HERE
+  \end{solution}
+  \fi
+
+  \item[(b)] (3 points) Which arrays with distinct elements from the
+  set $\{1,2,\ldots, n\}$ have the smallest and the largest number of
+  inversions and why?  State the expressions {\em exactly} in terms of
+  $n$.
+
+  \ifnum\me<2
+  \begin{solution}
+    INSERT YOUR SOLUTION HERE
+  \end{solution}
+  \fi
+
+  \item[(c)] (5 points) What is the relationship between the running
+  time of {\sc{Insertion-Sort}} and the number of inversions $I$ in
+  the input array? {\em Justify your answer}.
+
+  \ifnum\me<2
+  \begin{solution}
+   INSERT YOUR SOLUTION HERE
+  \end{solution}
+  \fi
+  
+  \item[(d)] (3 points) For any $0<a<1/2$, construct an array
+  for which insertion sort has a run time of $an^2+\Theta(n)$.
+   \ifnum\me<2
+  \begin{solution}
+    INSERT YOUR SOLUTION HERE
+  \end{solution}
+  \fi
+\item[(e)] (3 points) Let $A[1, \ldots, n]$
+  be a random permutation of $\{1,2,\ldots, n\}$.  What is the
+  expected number of inversions of $A$.  What can you conclude about
+  the average case running time of {\sc{Insertion-Sort}} (where the
+  average is over all arrays $A$ of size $n$)?
+ 
+ \textbf{Hint:} Recall the linearity of expectation, i.e., for any
+  real $a, b, c$ and any random variables $X, Y$,
+  \[E(aX+bY+c) = a E(X) + b E(Y) + c \; .\]
+  \ifnum\me<2
+  \begin{solution}
+    INSERT YOUR SOLUTION HERE
+  \end{solution}
+  \fi
+
+\end{itemize}
+
+
+
+\end{document}
+
+

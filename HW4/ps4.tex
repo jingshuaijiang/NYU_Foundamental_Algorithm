@@ -1,0 +1,426 @@
+% me=0 student solutions (ps file), me=1 - my solutions (sol file),
+% me=2 - assignment (hw file)
+\def\me{0} \def\num{4} %homework number
+
+\def\due{5 pm on Thursday, October 3} %due date
+
+\def\course{CSCI-GA.1170-003/004 Fundamental Algorithms} 
+%course name, changed only once
+
+% **** INSERT YOUR NAME HERE ****
+\def\name{jingshuai jiang}
+
+% **** INSERT YOUR NETID HERE ****
+\def\netid{jj2903}
+
+% **** INSERT NETIDs OF YOUR COLLABORATORS HERE ****
+\def\collabs{NetID1, NetID2}
+
+
+\iffalse
+
+INSTRUCTIONS: replace # by the homework number.  (if this is not
+ps#.tex, use the right file name)
+
+Clip out the ********* INSERT HERE ********* bits below and insert
+appropriate LaTeX code.  There is a section below for student macros.
+It is not recommended to change any other parts of the code.
+
+
+\fi
+%
+
+\documentclass[11pt]{article}
+
+
+% ==== Packages ====
+\usepackage{amsfonts,amsmath}
+\usepackage{latexsym}
+\usepackage{fullpage}
+\usepackage{graphicx}
+\usepackage[bottom]{footmisc}
+
+
+% \setlength{\oddsidemargin}{.0in} \setlength{\evensidemargin}{.0in}
+% \setlength{\textwidth}{6.5in} \setlength{\topmargin}{-0.4in}
+\setlength{\footskip}{1in} \setlength{\textheight}{8.5in}
+
+\newcommand{\handout}[5]{
+\renewcommand{\thepage}{#1, Page \arabic{page}}
+  \noindent
+  \begin{center}
+    \framebox{ \vbox{ \hbox to 5.78in { {\bf \course} \hfill #2 }
+        \vspace{4mm} \hbox to 5.78in { {\Large \hfill #5 \hfill} }
+        \vspace{2mm} \hbox to 5.78in { {\it #3 \hfill #4} }
+        \ifnum\me=0
+        \vspace{2mm} \hbox to 5.78in { {\it Collaborators: \collabs
+            \hfill} }
+        \fi
+      } }
+  \end{center}
+  \vspace*{4mm}
+}
+
+\newcounter{pppp}
+\newcommand{\prob}{\arabic{pppp}} %problem number
+\newcommand{\increase}{\addtocounter{pppp}{1}} %problem number
+
+% Arguments: Title, Number of Points
+\newcommand{\newproblem}[2]{
+  \ifnum\me=0
+    \ifnum\prob>0 \newpage \fi
+    \increase
+    \setcounter{page}{1}
+    \handout{\name{} (\netid), Homework \num, Problem \arabic{pppp}}
+    {\today}{Name: \name{} (\netid)}{Due: \due}
+    {Solutions to Problem \prob\ of Homework \num\ (#2)}
+  \else
+    \increase
+    \section*{Problem \num-\prob~(#1) \hfill {#2}}
+  \fi
+}
+
+% \newcommand{\newproblem}[2]{\increase
+% \section*{Problem \num-\prob~(#1) \hfill {#2}}
+% }
+
+\def\squarebox#1{\hbox to #1{\hfill\vbox to #1{\vfill}}}
+\def\qed{\hspace*{\fill}
+  \vbox{\hrule\hbox{\vrule\squarebox{.667em}\vrule}\hrule}}
+\newenvironment{solution}{\begin{trivlist}\item[]{\bf Solution:}}
+  {\qed \end{trivlist}}
+\newenvironment{solsketch}{\begin{trivlist}\item[]{\bf Solution
+      Sketch:}} {\qed \end{trivlist}}
+\newenvironment{code}{\begin{tabbing}
+    12345\=12345\=12345\=12345\=12345\=12345\=12345\=12345\= \kill }
+  {\end{tabbing}}
+
+%\newcommand{\eqref}[1]{Equation~(\ref{eq:#1})}
+
+\newcommand{\hint}[1]{({\bf Hint}: {#1})}
+% Put more macros here, as needed.
+\newcommand{\room}{\medskip\ni}
+\newcommand{\brak}[1]{\langle #1 \rangle}
+\newcommand{\bit}[1]{\{0,1\}^{#1}}
+\newcommand{\zo}{\{0,1\}}
+\newcommand{\C}{{\cal C}}
+
+\newcommand{\nin}{\not\in}
+\newcommand{\set}[1]{\{#1\}}
+\renewcommand{\ni}{\noindent}
+\renewcommand{\gets}{\leftarrow}
+\renewcommand{\to}{\rightarrow}
+\newcommand{\assign}{:=}
+
+\newcommand{\AND}{\wedge}
+\newcommand{\OR}{\vee}
+
+\newcommand{\For}{\mbox{\bf for }}
+\newcommand{\To}{\mbox{\bf to }}
+\newcommand{\Do}{\mbox{\bf do }}
+\newcommand{\If}{\mbox{\bf if }}
+\newcommand{\Then}{\mbox{\bf then }}
+\newcommand{\Else}{\mbox{\bf else }}
+\newcommand{\While}{\mbox{\bf while }}
+\newcommand{\Repeat}{\mbox{\bf repeat }}
+\newcommand{\Until}{\mbox{\bf until }}
+\newcommand{\Return}{\mbox{\bf return }}
+\newcommand{\Halt}{\mbox{\bf halt }}
+\newcommand{\Swap}{\mbox{\bf swap }}
+\newcommand{\Ex}[2]{\textrm{exchange } #1 \textrm{ with } #2}
+
+
+
+\begin{document}
+
+\ifnum\me=0
+
+% Collaborators (on a per task basis):
+%
+% Task 1: *********** INSERT COLLABORATORS HERE *********** 
+% Task 2: *********** INSERT COLLABORATORS HERE *********** 
+% etc.
+%
+
+\fi
+
+\ifnum\me=1
+
+\handout{PS \num}{\today}{Lecturer: Yevgeniy Dodis}{Due: \due}
+{Solution {\em Sketches} to Problem Set \num}
+
+\fi
+
+\ifnum\me=2
+
+\handout{PS \num}{\today}{Lecturer: Yevgeniy Dodis}{Due: \due}{Problem
+  Set \num}
+
+\fi
+
+
+\newproblem{Positive Elements in a Heap} {18 points}
+
+\noindent
+Given a maxheap $A$ of size $n$, let $pos=pos(A,i,n)$ denote the number
+of positive elements in the sub-heap of $A$ rooted at $i$. We can write 
+a recursive procedure to compute this value. 
+
+
+\begin{itemize}
+\item[(a)](5 points) Consider the following pseudocode. Fill in the blanks
+with the appropriate values. Remember that this is a
+recursive procedure. 
+\begin{code}
+1 {\sc PositiveCount}$(A, i,n)$\\
+2 \> \If $i>n$ \Return $0$ \\
+3 \> \If $A[i] \le 0$ \Return $\underline{\hspace{3cm}}$ \\
+4 \> $left = ${\sc PositiveCount}$(\underline{\hspace{3cm}})$ \\
+5 \> $right = ${\sc PositiveCount}$(\underline{\hspace{3cm}})$ \\
+6 \> $pos = \underline{\hspace{3cm}}$\\
+7 \> \Return $pos$
+\end{code}
+\begin{solution}   
+  \begin{code}
+    1 {\sc PositiveCount}$(A, i,n)$\\
+    2 \> \If $i>n$ \Return $0$ \\
+    3 \> \If $A[i] \le 0$ \Return $\underline{0 \hspace{3cm}}$ \\
+    4 \> $left = ${\sc PositiveCount}$(\underline{A,left(i),n\hspace{3cm}})$ \\
+    5 \> $right = ${\sc PositiveCount}$(\underline{A,right(i),n\hspace{3cm}})$ \\
+    6 \> $pos = \underline{left+right+1\hspace{3cm}}$\\
+    7 \> \Return $pos$
+    \end{code}
+   \end{solution}
+
+\item[(b)] (5 points) Prove correctness of the above algorithm. Make
+  sure to explain the meaning of each line 2-5. Then argue that the
+  algorithm above runs in time $O(pos)$, independent of $n$.
+
+\ifnum\me<2
+\begin{solution}   
+  \\[10pt] line 2 means if the index of the node i is larger than the whole maxheap, then we return this node's positive number to be 0;
+  \\[10pt] line 3 means if the current node value is less than or equal to 0,then all of the childrens can not be positive numbers than ,we return 0;
+  \\[10pt] line 4 means we recurrsively get the positive numbers of the leftchild.
+  \\[10pt] line 5 means we recurrsively get the positive numbers of the rightchild.
+
+  \\[10pt] each time when we get a positive node we will do the procedure of "pos = left +right+1" this one here means we add one to the positive numbers. Then the total number will be the value of the whole pos. Since each node is added for one time.Then it is in time $O(pos)$. This algorithm is independent of n because for different i it is different running time, with no relation to the n,just related to pos.
+
+  \end{solution}
+\fi
+
+\item[(c)] (8 points) Assume now that we do not really care about the
+  exact value of $pos$ when $pos>k$; i.e., if the heap contains more
+  than $k$ positive elements, for some parameter $k$. More formally,
+  you wish to write a procedure {\sc kPositiveCount}$(A,i,n,k)$ which
+  returns the value $\min(pos,k)$, where $pos =$ {\sc
+    PositiveCount}$(A, i,n)$.
+
+  Of course, you can implement {\sc kPositiveCount}$(A,i,n,k)$ by
+  calling {\sc PositiveCount}$(A, i,n)$ first, but this will take time
+  $O(pos)$, which could be high if $pos\gg k$. Show how to (slightly)
+  tweak the pseudocode above to {\em directly} implement {\sc
+    kPositiveCount}$(A,i,n,k)$ (instead of {\sc PositiveCount}$(A,
+  i,n)$) so that the running time of your procedure is $O(k)$,
+  irrespective of $pos$. Make sure you explicitly write the pseudocode
+  of you new recursive algorithm (which should be similar to the one given
+  above), prove its correctness, and argue the $O(k)$ run time.
+\ifnum\me<2
+\begin{solution}   
+  \begin{code}
+    1 {\sc kPositiveCount}$(A, i,n,k)$\\
+    2 \> \If $k\le0$ \Return $0$ \\
+    3 \> \If $i>n$ \Return $0$ \\
+    4 \> \If $A[i] \le 0$ \Return $\underline{0 \hspace{3cm}}$ \\
+    5 \> $left = ${\sc kPositiveCount}$(\underline{A,left(i),n,k-1\hspace{3cm}})$ \\
+    6 \> $right = ${\sc kPositiveCount}$(\underline{A,right(i),n,k-left-1\hspace{3cm}})$ \\
+    7 \> $pos = \underline{left+right+1\hspace{3cm}}$\\
+    8 \> \Return $pos$
+    \end{code}
+
+    \\[10pt] $proof:$ line 2 means if k is less than or equal to 0, then it means that the number of k has been reached,we won't count the numbers of the positive numbers of its child nodes.
+    so we just return 0.
+    \\[10pt] line 3 means if the index of the node i is larger than the whole maxheap, then we return this node's positive number to be 0;
+    \\[10pt] line 4 means if the current node value is less than or equal to 0,then all of the childrens can not be positive numbers than ,we return 0;
+    \\[10pt] line 5 means We recurrsively find positve numbers in its left child.This ith node is positive, then we should minus it from the k.Since we only have to count $min(pos,k)$, and we only need to find k-1 nodes in its left child subarrays.
+    \\[10pt]line 6 means We recurrsively find positve numbers in its right child. We only need to find k-1-left positive numbers in its right child subarrays.
+
+    \\[10pt] the algorithm will stop when k is reached or all the positive numbers have been counted. k is minus from k to 0 one at a time.Then it takes k times to do it.It is obvious $O(k)$.If all the positive numebrs have been counted, which means k is greater than $pos$ ,then it is $$O(k)$$
+  \end{solution}
+\fi
+
+\end{itemize}
+\newproblem{Insertion Sort vs Quicksort}{6 points}
+Recall that in the worst case the running time of (non-randomized) {\sc QuickSort}
+and {\sc InsertionSort} are $\Theta(n^2)$. Refer to the algorithm given on Page 171
+for {\sc QuickSort} implementation. Pay attention to the last line of the {\sc Partition}
+procedure.  
+\begin{itemize}
+\item[(a)] (3 points) Give an example of array of length $n$ where both take time
+$\Omega(n^2)$. Justify your answer.  
+\ifnum\me<2
+\begin{solution}   
+  \\[10pt] if the array of length n is decreasing sorted, then both of them take time $\Omega(n^2)$
+  \\[10pt] $proof \ for\ QuickSort:$ if it is decreasing sorted,each time after the partition precedure it will devide the following  array into a $T(n-1)$ and a $T(0)$ then we get $$T(n) = T(n-1)+O(n)= \Theta(n^2) = \Omega(n^2)$$
+  \\[10pt] $proof \ for\ InsertionSort:$ if it is decreasing sorted , then it will take j-1 time exchange to resort. j is from 2 to a.length, then it takes time $O(n^2) = \Omega(n^2)$
+  \end{solution}
+  \fi
+  \item [(b)] (3 points) Give an example of array of length $n$ where
+  (non-randomized) {\sc QuickSort} runs in $\Omega(n^2)$ but {\sc Insertion-Sort} runs
+  in time $O(n)$. Justify your answer. 
+  \ifnum\me<2
+\begin{solution}   
+  \\[10pt] if the array of length n is already sorted, then quicksort takes time $\Omega(n^2)$, insertion sort takes time $O(n)$
+  \\[10pt] $proof \ for\ QuickSort:$ if it is already sorted,each time after the partition precedure it will devide the following  array into a $T(n-1)$ and a $T(0)$ then we get $$T(n) = T(n-1)+O(n)= \Theta(n^2) = \Omega(n^2)$$
+  \\[10pt] $proof \ for\ InsertionSort:$ if it is already sorted , then it only needs to traversing the array without doing anything which takes time $O(n)$
+ 
+   \end{solution}
+  \fi
+  \end{itemize}
+\newproblem{Stable Algorithms} {20+3 points}
+
+
+\noindent
+We now define the notion of \emph{stability} of a sorting algorithm.  
+A sorting algorithm is said to be \emph{stable} if it preserves the
+original order of equal elements in the sorted array.
+For example when sorting the array $<4',2,8,5,3,4^*>$ a stable sorting
+algorithm returns $<2,3,4',4^*,5,8>$ while an
+unstable algorithm returns $<2,3,4^*,4',5,8>$.
+\begin{itemize}
+\item[(a)] (3 Points) Argue that {\textsc{QuickSort}} (as on page 171) is not
+ necessarily a stable sorting algorithm. In particular, give an
+ example of an array where {\textsc{QuickSort}} is not stable. Make sure you
+ justify your answer.
+
+\ifnum\me<2
+\begin{solution} 
+  $<2',2^*,3,4,5,0>$  after the algorithm it will output $<0,2^*,2',3,4,5>$
+  \end{solution}
+\fi
+\item[(b)] (3 Points) Remember, the {\sc Partition} procedure places
+ all elements less than or equal to the pivot $A[r]$ (whose rank is
+later  determined as $q$) into array $B=A[p,\ldots, q-1]$, and all
+elements greater than the pivot $A[r]$ into array $C=A[q+1,\ldots,
+ r]$.  Which of the following three (mutually exclusive) statement is
+ correct, after the first call to {\sc Partition}:
+\begin{itemize}
+\item[1.] Elements of $B$ are always guaranteed to be in ``stable'' order,
+but elements of $C$ may or may not be.
+\item[2.] Elements of $C$ are always guaranteed to be in ``stable'' order,
+but elements of $B$ may or may not be.
+\item[3.] Neither elements of $B$ nor the elements of $C$ are
+guaranteed to be in ``stable'' order.
+\end{itemize}
+If you answered 1. or 2., be sure to argue why the corresponding array
+is guaranteed to be ``stable'' (you can refer to your counter-example
+in part (a) to show why the other array is not stable). If you
+answered 3., make sure you give the example of this scenario as well.
+
+\ifnum\me<2
+\begin{solution}   
+  \\[10pt] my answer is 1.
+  \\[10pt] When doing the partition procedure, when j gose from p to r-1 if we meet a number that is smaller than A[r], we will insert it to the ith place.
+  and i will move to the next place. This first come first insert rule guarantee the relative order of these elements. And finally makes it stable.
+  \\[10pt] In the meantime everytime when it finishes the partition process. It will exchange the A[pivot] with A[r], which will destroy the relative order of A[pivot] to some other points.
+  \end{solution}
+\fi
+  \item[(c)] (5 Points) Give a variant of the {\sc Partition}
+procedure which still runs in time $O(n)$, but makes {\sc Quicksort}
+ stable. Notice, you are {\em no longer required} to sort the elements
+ ``in place''.
+
+\ifnum\me<2
+\begin{solution}   
+  \begin{code}
+    1 {\sc NewPartition}$(A,p,r)$\\
+    2 \> smaller,greater = [],[] \\
+    3 \> $for \ j=p to r-1$\\
+    4 \>\> \If $A[j] \le A[r]$ \\
+    5 \>\>\> $smaller.append(A[j])$\\ 
+    6 \>\> else \ $greater.append(A[j])$\\
+    7 \> $for \ i=0 to smaller.length-1$\\
+    8 \>\> $A[p+i] = smaller[i]$\\
+    9 \>$A[p+smaller.length] = A[r]$\\
+    10\> $for \ i=0 to greater.length-1$\\
+    11\>\> $A[p+i+smaller.length+1] = greater[i]$\\
+    12\> \Return $p+smaller.length$
+   
+    \end{code}
+\end{solution}
+\fi
+\end{itemize}
+
+In the previous part we modified the {\sc Partition} 
+   procedure described in the textbook to make it $\emph{stable}$. Observe that a \emph{stable} partition procedure is one which
+  preserves the relative order of elements less than the pivot and the
+  relative order of elements greater than pivot after the partition.
+  \begin{itemize}
+    \item[(d)] (2 points) Prove that a stable partition on $A$ where $A$ is a
+    random permutation, results in subarrays that are random
+    permutations themselves.  \hint{Consider the two distributions:
+      (a) running the stable partition on a random permutation $A$ and
+      taking the left half; (b) a random permutation over $B$ where
+      $B$ consists of all elements in $A$ less than the pivot.}
+
+    \ifnum\me<2
+\begin{solution}      
+  \\[10pt] Let we assume that the length of the left half of A after first partition is q (a) the left half of A after first partition is uniform distribution. Because it just move all the numbers smaller than A[r] to the left side without disturbing their raltive order. Then each possible permutaion will have a possibility of $\frac{1}{q!}$ which is uniform distribution.
+  \\[10pt] (b) the random permutation over B where B consists of all elements in A less than the pivot is also a uniform distribution. Since b have q
+  elements, then every possible permutation has the possibility of $\frac{1}{q!}$
+  \\[10pt] Obviously these two are the same distribution, a stable partition on A results in subarrays that are random permutaions themselves.
+\end{solution}
+    \fi
+
+    \item[(e)] (6 points) Use the above observation to write a recurrence for
+    the expected running time of Quicksort on a random permutation
+    $A$, and solve it. \hint{Recall the recurrence for Randomized
+      {\textsc{QuickSort}} from the lecture.}
+    
+    \ifnum\me<2
+\begin{solution}   
+  \\[10pt] according to the question (4-d) the two parts of the A after the partition procedure are still random permutatuions themselves.
+  Then we just divide the A array into two similar random array. Then we get the equation. 
+  $$T(n) = \exp_{0 \le q \le n-1}[T(q)+T(n-q-1)+n] = n+\frac{1}{n}[T(0)+...+T(n-1)]$$
+  $$nT(n) = n^2 + 2[T(0)+...+T(n-1)]$$
+  $$(n-1)T(n-1) = (n-1)^2 + 2[T(0)+...+T(n-2)]$$
+  $$nT(n) =(n+1)T(n-1)+2n-1]$$
+  $$\frac{T(n)}{n+1} = \frac{T(n-1)}{n}+\frac{2n-1}{n(n+1)} \le \frac{T(n-1)}{n}+\frac{2}{n}$$
+  $$S(n) = S(n-1) +\frac{2}{n} = \Theta(logn)$$
+  $$T(n) = \Theta(nlogn)$$ 
+\end{solution}
+    \fi
+    \item[(f)] (1 point) Which of {\textsc{QuickSort}} and
+    {\textsc{InsertionSort}} has better expected running time on a
+    random permutation? Use the results from Problem 1-3 for 
+    expected running time of Insertion Sort. 
+
+    \ifnum\me<2
+\begin{solution}   
+  \\[10pt] quicksort has beeter expected running time.
+   \end{solution}
+    \fi
+
+
+  \item[(g)] (3 points) [\textbf{Extra credit}] Prove that the
+  expected running time of {\textsc{QuickSort}} computed in part (d)
+  does not change if we use the standard (non-stable) Partition
+  procedure from the book.
+
+  \ifnum\me<2
+\begin{solution}   
+  The unstable partition procedure will not change the relative order of the smaller parts. It do not change the relative order of the bigger parts except for the first number in the bigger part, which will be swiched to the end of this bigger part.
+  and after this switch the bigger part and the smaller parts are still random permutations. Then we can get a similar procedure when dealing with a stable partition procedure.
+  Then we get $$T(n) = \exp_{0 \le q \le n-1}[T(q)+T(n-q-1)+n] = n+\frac{1}{n}[T(0)+...+T(n-1)]$$
+  $$nT(n) = n^2 + 2[T(0)+...+T(n-1)]$$
+  $$(n-1)T(n-1) = (n-1)^2 + 2[T(0)+...+T(n-2)]$$
+  $$nT(n) =(n+1)T(n-1)+2n-1]$$
+  $$\frac{T(n)}{n+1} = \frac{T(n-1)}{n}+\frac{2n-1}{n(n+1)} \le \frac{T(n-1)}{n}+\frac{2}{n}$$
+  $$S(n) = S(n-1) +\frac{2}{n} = \Theta(logn)$$
+  $$T(n) = \Theta(nlogn)$$ 
+   \end{solution}
+  \fi
+ 
+\end{itemize}
+\end{document}
+
+

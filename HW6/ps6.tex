@@ -1,0 +1,860 @@
+% me=0 student solutions (ps file), me=1 - my solutions (sol file),
+% me=2 - assignment (hw file)
+\def\me{0} \def\num{6} %homework number
+
+\def\due{5 pm on Thursday, October 17} %due date
+
+\def\course{CSCI-GA.1170-001/002 Fundamental Algorithms} 
+%course name, changed only once
+
+% **** INSERT YOUR NAME HERE ****
+\def\name{jingshuai jiang}
+
+% **** INSERT YOUR NETID HERE ****
+\def\netid{jj2903}
+
+% **** INSERT NETIDs OF YOUR COLLABORATORS HERE ****
+\def\collabs{NetID1, NetID2}
+
+
+\iffalse
+
+INSTRUCTIONS: replace # by the homework number.  (if this is not
+ps#.tex, use the right file name)
+
+Clip out the ********* INSERT HERE ********* bits below and insert
+appropriate LaTeX code.  There is a section below for student macros.
+It is not recommended to change any other parts of the code.
+
+
+\fi
+%
+
+\documentclass[11pt]{article}
+
+
+% ==== Packages ====
+\usepackage{amsfonts,amsmath}
+\usepackage{latexsym}
+\usepackage{fullpage}
+\usepackage{graphicx}
+\usepackage{tikz}
+\usepackage{tikz-qtree}
+\usepackage[bottom]{footmisc}
+\usepackage{listings}
+
+\lstset{
+ basicstyle=\fontsize{7}\selectfont\ttfamily
+ columns=fixed,                           % 设定行号格式
+ frame=none,                                          % 不显示背景边框
+ backgroundcolor=\color[RGB]{245,245,244},            % 设定背景颜色
+ keywordstyle=\color[RGB]{40,40,255},                 % 设定关键字颜色
+ numberstyle=\footnotesize\color{darkgray},           
+ commentstyle=\it\color[RGB]{0,96,96},                % 设置代码注释的格式
+ stringstyle=\rmfamily\slshape\color[RGB]{128,0,0},   % 设置字符串格式
+ showstringspaces=false,                              % 不显示字符串中的空格
+ language=java,                                        % 设置语言
+}
+
+% \setlength{\oddsidemargin}{.0in} \setlength{\evensidemargin}{.0in}
+% \setlength{\textwidth}{6.5in} \setlength{\topmargin}{-0.4in}
+\setlength{\footskip}{1in} \setlength{\textheight}{8.5in}
+
+\newcommand{\handout}[5]{
+\renewcommand{\thepage}{#1, Page \arabic{page}}
+  \noindent
+  \begin{center}
+    \framebox{ \vbox{ \hbox to 5.78in { {\bf \course} \hfill #2 }
+        \vspace{4mm} \hbox to 5.78in { {\Large \hfill #5 \hfill} }
+        \vspace{2mm} \hbox to 5.78in { {\it #3 \hfill #4} }
+        \ifnum\me=0
+        \vspace{2mm} \hbox to 5.78in { {\it Collaborators: \collabs
+            \hfill} }
+        \fi
+      } }
+  \end{center}
+  \vspace*{4mm}
+}
+
+\newcounter{pppp}
+\newcommand{\prob}{\arabic{pppp}} %problem number
+\newcommand{\increase}{\addtocounter{pppp}{1}} %problem number
+
+% Arguments: Title, Number of Points
+\newcommand{\newproblem}[2]{
+  \ifnum\me=0
+    \ifnum\prob>0 \newpage \fi
+    \increase
+    \setcounter{page}{1}
+    \handout{\name{} (\netid), Homework \num, Problem \arabic{pppp}}
+    {\today}{Name: \name{} (\netid)}{Due: \due}
+    {Solutions to Problem \prob\ of Homework \num\ (#2)}
+  \else
+    \increase
+    \section*{Problem \num-\prob~(#1) \hfill {#2}}
+  \fi
+}
+
+% \newcommand{\newproblem}[2]{\increase
+% \section*{Problem \num-\prob~(#1) \hfill {#2}}
+% }
+
+\def\squarebox#1{\hbox to #1{\hfill\vbox to #1{\vfill}}}
+\def\qed{\hspace*{\fill}
+  \vbox{\hrule\hbox{\vrule\squarebox{.667em}\vrule}\hrule}}
+\newenvironment{solution}{\begin{trivlist}\item[]{\bf Solution:}}
+  {\qed \end{trivlist}}
+\newenvironment{solsketch}{\begin{trivlist}\item[]{\bf Solution
+      Sketch:}} {\qed \end{trivlist}}
+\newenvironment{code}{\begin{tabbing}
+    12345\=12345\=12345\=12345\=12345\=12345\=12345\=12345\= \kill }
+  {\end{tabbing}}
+
+%\newcommand{\eqref}[1]{Equation~(\ref{eq:#1})}
+
+\newcommand{\hint}[1]{({\bf Hint}: {#1})}
+% Put more macros here, as needed.
+\newcommand{\room}{\medskip\ni}
+\newcommand{\brak}[1]{\langle #1 \rangle}
+\newcommand{\bit}[1]{\{0,1\}^{#1}}
+\newcommand{\zo}{\{0,1\}}
+\newcommand{\C}{{\cal C}}
+
+\newcommand{\nin}{\not\in}
+\newcommand{\set}[1]{\{#1\}}
+\renewcommand{\ni}{\noindent}
+\renewcommand{\gets}{\leftarrow}
+\renewcommand{\to}{\rightarrow}
+\newcommand{\assign}{:=}
+
+\newcommand{\AND}{\wedge}
+\newcommand{\OR}{\vee}
+
+\newcommand{\For}{\mbox{\bf for }}
+\newcommand{\To}{\mbox{\bf to }}
+\newcommand{\DownTo}{\mbox{\bf downto }}
+\newcommand{\Do}{\mbox{\bf do }}
+\newcommand{\If}{\mbox{\bf if }}
+\newcommand{\Then}{\mbox{\bf then }}
+\newcommand{\Else}{\mbox{\bf else }}
+\newcommand{\While}{\mbox{\bf while }}
+\newcommand{\Repeat}{\mbox{\bf repeat }}
+\newcommand{\Until}{\mbox{\bf until }}
+\newcommand{\Return}{\mbox{\bf return }}
+\newcommand{\Halt}{\mbox{\bf halt }}
+\newcommand{\Swap}{\mbox{\bf swap }}
+\newcommand{\Ex}[2]{\textrm{exchange } #1 \textrm{ with } #2}
+\newcommand{\Nil}{\mbox{\bf nil }}
+\newcommand{\In}{\mathsf{in}}
+\newcommand{\Post}{\mathsf{post}}
+\newcommand{\Pre}{\mathsf{pre}}
+\newcommand{\True}{\textsc{True}}
+\newcommand{\False}{\textsc{False}}
+
+\begin{document}
+
+\ifnum\me=0
+
+% Collaborators (on a per task basis):
+%
+% Task 1: *********** INSERT COLLABORATORS HERE *********** 
+% Task 2: *********** INSERT COLLABORATORS HERE *********** 
+% etc.
+%
+
+\fi
+
+\ifnum\me=1
+
+\handout{PS \num}{\today}{Lecturer: Yevgeniy Dodis}{Due: \due}
+{Solution {\em Sketches} to Problem Set \num}
+
+\fi
+
+\ifnum\me=2
+
+\handout{PS \num}{\today}{Lecturer: Yevgeniy Dodis}{Due: \due}{Problem
+  Set \num}
+
+\fi
+
+
+\newproblem{Is it a BST?}{15 Points}
+
+\noindent Let us recall the definition of 
+{\em binary search tree property}: Let $x$ be a node
+in a binary search tree. If $y$ is a node in the left subtree of $x$, then 
+$y.key\leq x.key$. If $y$ is a node in the right subtree of $x$, then $y.key\geq x.key$
+
+Any binary tree that satisfies this property is a binary search tree. The
+goal of this question is to create an algorithm to check if a given binary 
+tree is also a binary search tree. 
+\noindent
+\begin{enumerate}
+  \item[(a)] (2 points) Consider the following algorithm: For each node, 
+  check if its left child is lesser than its key and its 
+  right child is greater than its key. If yes, pass the recursion onto
+  the left and right child. This pseudocode is as follows:
+  \begin{code}
+  1 \textsc{IsBST-A}$(x)$	\\
+  2 \> \If $(x=\textsc{NIL})$\\
+  3 \> \> \Return \True\\
+  4 \> \If $(x.left!=\Nil \And x.left.key>x.key)$\\
+  5 \> \> \Return \False\\
+  6 \> \If $(x.right!=\Nil \And x.right.key<x.key)$\\
+  7 \> \> \Return \False\\
+  8 \> \If ({\sc IsBST-A}$(x.left)$=\False\ Or  {\sc IsBST-A}$(x.right)$=\False)\\
+  9 \> \> \Return \False\\
+  10 \> \Return \True
+  \end{code}
+  Show that this algorithm is wrong by constructing
+  an example of a binary tree which is not a binary search tree 
+  but for which the algorithm returns true. 
+	
+  \ifnum\me<2
+\begin{solution}   
+    \centering
+    \includegraphics[scale=0.3]{tree.png}
+    \caption{this is a wrong tree}
+   \end{solution}
+  \fi
+
+
+  \item[(b)] (3 points) The goal of this question is
+  to modify {\sc IsBST-A} to make it work. To achieve this,
+  you may use two helper helper functions {\sc FindMIn}$(v)$, 
+  {\sc FindMax}$(v)$ that returns the minimum and maximum value
+  from a non-empty sub-tree rooted at $v$. These are trivial $O(n)$ algorithms
+  that take as input the node of a binary tree and returns the
+  minimum and maximum values respectively in the subtree
+  rooted at that node. Construct 
+  this algorithm  {\sc IsBST-B} by minimally modifying {\sc IsBST-A}. 
+  Argue the correctness of your algorithm. 
+	\hint{You have to change only two lines in the code for {\sc IsBST-A}.}
+  \ifnum\me<2
+\begin{solution}   
+  \begin{code}
+    1 \textsc{IsBST-A}$(x)$	\\
+    2 \> \If $(x=\textsc{NIL})$\\
+    3 \> \> \Return \True\\
+    4 \> \If $(x.left!=\Nil \And FindMax(x.left)>x.key)$\\
+    5 \> \> \Return \False\\
+    6 \> \If $(x.right!=\Nil \And FindMin(x.right)<x.key)$\\
+    7 \> \> \Return \False\\
+    8 \> \If ({\sc IsBST-A}$(x.left)$=\False\ Or  {\sc IsBST-A}$(x.right)$=\False)\\
+    9 \> \> \Return \False\\
+    10 \> \Return \True
+    \end{code}
+   \end{solution}
+\fi
+\item[(c)](3 points) What is the recurrence relation for the runtime 
+of the above algorithm?
+Solve the same to give the worst-case runtime of your algorithm. 
+\hint{Let $n_1,n_2$ be the number of nodes
+in the left and right subtrees. Then, $n_1+n_2=n-1$.} 
+  \ifnum\me<2
+\begin{solution}   
+  $$T(n) = T(k)+T(n-k-1)+O(n-1) = \Theta(nlogn)$$
+   \end{solution}
+\fi
+\item[(d)](4 points) Modify {\sc IsBST-B} to create a linear time algorithm 
+{\sc IsBST-C}. This algorithm takes as input $x$ indicating the subtree rooted
+at node $x$. It should return three values: the minimum element, the maximum element 
+in the subtree rooted at $x$, and a boolean value indicating if the subtree
+is a BST or not. 
+Argue the correctness of your algorithm.   
+
+\ifnum\me<2
+\begin{solution}   
+  \begin{code}
+    1 \textsc{IsBST-C}$(x)$	\\
+    2 \> \If $(x=\textsc{NULL})$\\
+    3 \> \> \Return\textsc{NULL}\ \textsc{NULL} \True\\
+    4 \> \If $(x.left!=\textsc{NULL})$\\
+    5 \> \> leftmin,\ leftmax,\ leftTruth = IsBST-C(x.left)\\
+    6 \>\Else leftmin,\ leftmax,\ leftTruth =x.value,x.value,\True\\
+    7 \> \If $(x.right!=\textsc{NULL})$\\
+    8 \> \> rightmin,\ rightmax,\ rightTruth = IsBST-C(x.right)\\
+    9 \>\Else rightmin,\ rightmax,\ rightTruth =x.value,x.value,\True\\
+    10 \> x.max = Max(leftmax,rightmax,x.value)\\
+    11 \> x.min = Min(leftmin,rightmin,x.value)\\
+    12\> \If (leftmax$>$x.value or rightmin$<$x.value or leftTruth == false or rightTruth ==false)\\
+    13 \> \> \Return x.min,\ x.max,\ \False\\
+    14\> \Else \\
+    15 \> \> \Return x.min,\ x.max,\ \True\\
+    
+
+    \end{code}
+    \\[10pt] We carefully examine each node by comparing whether its value is greater than all the values of its leftchild, whether its value is less than all the values of its rightchild
+    and whether its subtree is binary search tree to decide whether it is a binary search tree.
+    \\[10pt] We compare the minvalue of its leftchild, the minvalue of its rightchild and the value of itself to determine the minimum value.
+    \\[10pt] We compare the maxvalue of its leftchild, the maxvalue of its rightchild and the value of itself to determine the maximum value.
+    \\[10pt] In this process, each node has been checked for only one time. So it is a linear time algorithm.
+  \end{solution}
+  \fi
+  \item[(e)](3 points) What is the recurrence relation for the runtime of the algorithm?
+  Solve the same to show that the worst-case runtime is $O(n)$. \hint{Let $n_1,n_2$ be the number of nodes
+in the left and right subtrees. Then, $n_1+n_2=n-1$.} 
+ \ifnum\me<2
+\begin{solution}   
+  $$T(n) = T(k)+T(n-k-1)+O(1)$$ If the tree always does not have its leftchild or it always does not have its rightchild,then we get the worst case,which is $$T(n) = T(0)+T(n-1)+O(1) = T(n-1) +O(1)=O(n)$$
+   \end{solution}
+\fi
+\end{enumerate}
+\newproblem{Walks into a Tree}{18 points}
+You are given various inputs corresponding to certain walk(s) of
+a binary tree $T$. The goal is to recover $T$ (uniquely) from these walks (i.e, provide
+a pseudocode, argue its correctness and runtime using a recurrence relation) or 
+provide counterexamples to show that recovering such a unique tree is not possible. The
+counterexample should contain the minimum number of nodes. 
+
+\hint{Assume that there exists a linear time algorithm {\sc Search}$(A,start,end,data)$ that
+searches for $data$ in the array $A$ between the indices $start$ and $end$ and
+returns the corresponding index. You may also find it useful to use a static variable.}
+
+\begin{enumerate}
+\item[(a)] (6 points) Two arrays $\In,\Pre$ corresponding to the inorder and preorder 
+walks of a Binary Tree. 
+  \ifnum\me<2
+\begin{solution}   
+  \begin{code}
+    1 \textsc{TreeNode ReconstructBinaryTree}$(int[]\ preorder,int []\ inorder)$	\\
+    2 \> prelen = preorder.length-1\\
+    3 \> inlen = inorder.length-1\\
+    4 \> TreeNode root = RSBTPIS(preorder,inorderTraversal,0,prelen,0,inlen)\\
+    5 \> \Return root\\
+  \end{code}
+
+  \begin{code}
+    1 \textsc{TreeNode RSBTPIS}$(int[]\ preorder,int\ [] inorder,int\ prestart,int\ preend,int\ instart,int\ inend)$	\\
+    2 \> \If (prestart$>=$preend$||$instart$>=$inend)\\
+    3 \> \> \Return null\\
+    4 \> TreeNode node = new TreeNode(preorder[prestart])\\
+    5 \> index = Seach(inorder,instart,inend,preorder[prestart])\\
+    6 \> node.left = RSBTPIS(preorder,inorder,prestart+1,prestart+index-instart,instart,index-1);\\
+    7 \> node.right= RSBTPIS(preorder,inorder,prestart+index-instart+1,preend,index+1,inend);\\
+    8 \> \Return node\\
+  \end{code}
+
+  \\[10pt] In this algorithm we carefully examine that the first element of the preorder string is the root of that tree. And according to the rule of inorder traversal, the elements before that root node is the leftchild elements and 
+  the elements after that root node is the rightchild.
+  \\[10pt] We just identify the root node and split the string to two parts which is left part and the right part. And recursively doing this process again and again. Then we get the whole tree.
+  \\[10pt] We set the finishing condition and then get the result.
+  $$T(n) = T(k)+T(n-k-1)+O(n) = O(nlogn)$$
+   \end{solution}
+\fi
+\item[(b)] (2 points) Two arrays $\Post,\Pre$ corresponding to the preorder and postorder walks of a Binary Tree. 
+  \ifnum\me<2
+\begin{solution}   
+  \\[10pt] It is not possible.
+   \end{solution}
+\fi
+  \item[(c)] (4 points) One array $\Pre$ corresponding to the preorder traversal of a \textbf{\em Binary Search Tree}. 
+    \ifnum\me<2
+\begin{solution}  
+  \begin{code}
+    1 \textsc{TreeNode reconstructBST}$(int[]\ pre)$	\\
+    2 \> TreeNode root = reCBST(pre,0,pre.length-1)\\
+    3 \> \> \Return root\\
+  \end{code}
+
+  \begin{code}
+    1 \textsc{TreeNode  reCBST}$(int[]\ pre,int\ preStart,int\ preEnd)$	\\
+    2 \> \If(preStart$>$preEnd) return null;\\
+    3 \> TreeNode node = new TreeNode(pre[preStart]);\\
+    4 \>int index = 0;\\
+    5 \>for(int i=preStart;i$<=$preEnd;i++)\\
+    6 \>\>\If(pre[i]$<$pre[preStart] and pre[i+1]$>=$pre[preStart])\\
+    7 \>\>\>index = i-preStart;break;\\
+    8 \>\>\Else index = i-preStart;\\
+    9 \>node.left = reCBST(pre,preStart+1,index);\\
+    10 \>node.right = reCBST(pre,index+1,preEnd);\\
+    11 \>\Return node;\\
+  \end{code}
+
+  \\[10pt] This is quite the same with what we do in the question(a). We have to find the boundary of leftchild and rightchild. According to the property of BST and preorder traversal, we find that the first element of this array is the root node.
+  \\[10pt] Then we keep looking for an element that it is smaller then the root node but its next is greater than or equal to the root node. Then this element is the boundary of its leftchild. Then we recursively use the function to split the left and right part of its children. 
+  \\[10pt]Finally We get the whole tree.
+  $$$$T(n) = T(k)+T(n-k-1)+O(n) = O(nlogn)$$$$
+  \end{solution}
+\fi
+\item[(d)] (6 points) One array $\Post$ corresponding to the postfix expression of an expression tree. 
+The following expression: $(8/4)+(5*(6-2))$ can be represented as the following tree:
+\Tree [.$+$ [.$/$ 8 4 ] [.$\ast$ 5 [.$-$ 6 2 ] ] ]
+
+Note that the inorder traversal of this expression tree yields the original expression and thus it is called
+the {\em infix} expression. The postorder traversal of this expression tree yields: $84/562-*+$ and this is called
+the {\em postfix} expression. Postfix and Prefix expressions are often preferred to infix expressions because
+it avoids ambiguity about the order of operations. \hint{Consider using a stack. Also, note that the operators
+are binary operators. You may also use boolean function {\sc isOperator} which takes a character and returns 
+\True~ if it is an operator, else returns \False. You may
+assume that the given expression is valid.}
+    \ifnum\me<2
+\begin{solution} 
+  \begin{code}
+    1 \textsc{TreeNode reconExpTree}$(int[]\ post)$	\\
+    2 \> \If(post ==null) return null;\\
+    3 \> LinkedList$<$TreeNode$>$ stack = new LinkedList$<$TreeNode$>$();\\
+    5 \>for(int i=0;i$<$post.length;i++)\\
+    6 \>\>\If(ISOperator(post[i]))\\
+    7 \>\>\> If(stack.isEmpty() or stack.size()$<$2)\\
+    8 \>\>\>\> \Return error;\\
+    9 \>\>\> TreeNode node = new TreeNode(post[i]);\\
+    10 \>\>\> node.left = stack.pop();\\
+    11 \>\>\>  node.right = stack.pop();\\
+    12 \>\>\>  stack.push(node);\\
+    13 \>\> \Else\\
+    14 \>\>\>TreeNode node = new TreeNode(post[i]);\\
+    15 \>\>\>stack.push(node);\\
+    16 \>  \If(stack.isEmpty() or stack.size()$>$1)\\
+    17 \>\> \Return error;\\
+    18 \>\Return stack.pop();\\
+  \end{code}
+
+  \end{solution}
+  \\[10pt] This whole process is very similar to the process of caculating the value of postfix expressions. We construct a stack and check the post string one by one. If it is a number we just push it into the stack. If it is an operator we just pop out two elements to be its leftchild
+  and rightchild. Then we push it back to the stack.
+  \\[10pt] After we finish checking the whole string we will have only one node in the stack. And we just pop it out to be the root node.
+  \\[10pt] If we can not pop out twice when looking for both two children, or after checking all the elements we have more than 1 node in this stack, then we get the wrong postfix expression.
+  \\[10pt] The running time is $$O(n)$$
+\fi
+\end{enumerate}
+
+\newproblem{Sorting with Duplicates}{10
+(+5) points}
+
+\noindent
+Assume you are given an array of $n$ integers with many duplicate values,
+so that you know that there are at most $t$ distinct values in the array.
+The goal of this problem is to develop a sorting algorithm that runs
+in time $O(n\log t)$.
+
+\begin{itemize}
+ \item[(a)](5 points) Build a data structure $D$ which supports two operations: {\sc
+Insert}$(D,v)$ and {\sc Frequency}$(D,v)$. The functionality of
+{\sc Frequency}$(D,v)$ is to return the number of times that {\sc
+Insert}$(D,v)$ was called. Both operations should run in time $O(\log t)$
+where $t$ is the number of distinct values of $v$ for which {\sc
+Insert}$(D,v)$ has been called.
+
+In other words if {\sc Insert} has been called 4 times on $(D,2)$ and 2
+times on $(D,6)$ then {\sc Frequency}$(D,3)$ returns $0$ but {\sc
+Frequency}$(D,2)$ returns 4 and both calls take time (about) $\log t$
+where $t = 2$.
+
+\ifnum\me<2
+\begin{solution}   
+\\[10pt] In order to make have a $log t $time of insert and check the Frequency, we build a AVL tree which is an auto-balanced-BST. Recall that if the BST is extremely unbalanced,we will have a time of $o(n)$ to insert,delete and search.
+But if we have an auto-balanced-BST, we will have a stable insert time of $O(logt)$. 
+\\[10pt] And we can get the Frequency of some specific value by adding an attribute to this Treenode data structure,each time we insert the same value,we add it by one. Then we just need to get the node's count numbers.
+All we have to do is to find that node and get its count attribute.
+The following is the datastructure of this AVL tree.
+\clearpage
+\begin{lstlisting}
+  package com.company;
+
+  import java.util.LinkedList;
+  import java.util.List;
+  
+  public class AVLTree {
+      private class AVLNode{
+          Integer val;
+          AVLNode left;
+          AVLNode right;
+          int height;
+          int count;
+          AVLNode(Integer value)
+          {
+              this(value,null,null);
+          }
+          AVLNode(Integer value, AVLNode leftchild,AVLNode rightchild)
+          {
+              val = value;
+              left = leftchild;
+              right = rightchild;
+              height = 0;
+              count=1;
+          }
+      }
+      private  AVLNode root;
+  
+      public AVLTree()
+      {
+          root = null;
+      }
+  
+      private int height( AVLNode node )
+      {
+          return node == null ? -1 : node.height;
+      }
+  
+      public void insert(int value)
+      {
+          root = insert(value,root);
+      }
+  
+      private AVLNode insert( Integer value, AVLNode node )
+      {
+          if( node == null )
+              return new AVLNode( value, null, null );
+  
+          int compareResult = value.compareTo( node.val );
+  
+          if( compareResult < 0 )
+          {
+              node.left = insert( value, node.left );//insert the value into the lefttree
+              if( height( node.left ) - height( node.right ) == 2 )//break the balance
+                  if( value.compareTo( node.left.val ) < 0 )//LLtype
+                      node = rotateWithLeftChild( node );
+                  else   //LRtype
+                      node = doubleWithLeftChild( node );
+          }
+          else if( compareResult > 0 )
+          {
+              node.right = insert( value, node.right );//insert the value into the righttree
+              if( height( node.right ) - height( node.left ) == 2 )//break the balance
+                  if( value.compareTo( node.right.val ) > 0 )//RR type
+                      node = rotateWithRightChild( node );
+                  else                           //RLtype
+                      node = doubleWithRightChild( node );
+          }
+          else
+          {
+              node.count++;
+          }
+              ;  // repeat doing nothing
+          node.height = Math.max( height( node.left ), height( node.right ) ) + 1;//update the height
+          return node;
+      }
+      private AVLNode rotateWithLeftChild( AVLNode k2 )
+      {
+          AVLNode k1 = k2.left;
+          k2.left = k1.right;
+          k1.right = k2;
+          k2.height = Math.max( height( k2.left ), height( k2.right ) ) + 1;
+          k1.height = Math.max( height( k1.left ), k2.height ) + 1;
+          return k1;
+      }
+  
+      private AVLNode rotateWithRightChild( AVLNode k1 )
+      {
+          AVLNode k2 = k1.right;
+          k1.right = k2.left;
+          k2.left = k1;
+          k1.height = Math.max( height( k1.left ), height( k1.right ) ) + 1;
+          k2.height = Math.max( height( k2.right ), k1.height ) + 1;
+          return k2;
+      }
+  
+      private AVLNode doubleWithLeftChild( AVLNode k3 )
+      {
+          k3.left = rotateWithRightChild( k3.left );
+          return rotateWithLeftChild( k3 );
+      }
+  
+      private AVLNode doubleWithRightChild( AVLNode k1 )
+      {
+          k1.right = rotateWithLeftChild( k1.right );
+          return rotateWithRightChild( k1 );
+      }
+      private Integer Frequency(Integer seachvalue,AVLNode node)
+      {
+          if(node ==null) return 0;
+          int compareResult = seachvalue.compareTo( node.val );
+  
+          if( compareResult < 0 ) return Frequency(seachvalue,node.left);
+          else if(compareResult >0) return Frequency(seachvalue,node.right);
+          else return node.count;
+      }
+      public List<Integer> inorderTraversal()
+      {
+          return inorderTraversal(root);
+      }
+  
+      private List<Integer> inorderTraversal(AVLNode root) {
+  
+          LinkedList<Integer> output = new LinkedList<>();
+          LinkedList<AVLNode> stack = new LinkedList<AVLNode>();
+          if (root == null) return output;
+          AVLNode current = root;
+          while (!stack.isEmpty() || current != null) {
+              while (current != null) {
+                  stack.push(current);
+                  current = current.left;
+              }
+              current = stack.pop();
+              while(current.count>0)
+              {
+                  output.add(current.val);
+                  current.count--;
+              }
+              current = current.right;
+          }
+          return output;
+      }
+  
+  }
+  
+
+  
+\end{lstlisting}
+   \end{solution}
+\fi
+
+ \item[(b)](5 points) Give an algorithm for sorting $n$ integers with $t$ distinct
+values in time $O(n \log t)$. You can use the data structure from
+part (a). Formally analyze the runtime of your algorithm and argue it's
+correctness.
+
+\ifnum\me<2
+\begin{solution}   
+  \begin{lstlisting}
+    public List<Integer> AVLsort(int[] numbers)
+    {
+        AVLTree tree = new AVLTree();
+        for(int i=0;i<numbers.length;i++)
+        {
+            tree.insert(numbers[i]);
+        }
+        return tree.inorderTraversal();
+    }
+  \end{lstlisting}
+  \\[10pt] The whole algorithm is quite simple. We use the insertion of the (a) part to insertion all the numbers into the AVL tree, each insertion takes time $O(log t)$, then all n numbers takes time$O(nlogt)$.
+  And since avl is a balanced BST, then the inorderTraversal will get these numbers in an increasing order. Then we just need to do this inorderTraversal, which takes time $O(n)$,
+  \\[10pt] Then the whole time takes about $O(nlogt +n) = O(nlogt)$
+   \end{solution}
+\fi
+
+ \item[(c)] ({\bf Extra Credit}) (5 points) Generalize your algorithm from part
+(c) so that it operates on any comparison based set of objects rather then
+just integers.
+
+\ifnum\me<2
+\begin{solution} 
+  \\[10pt] I just replaced the integer value to any class that implement Comparable function(others remain the same with D in (a)). Then this data structure and function can easily be applied to operates on any comparison based set of objects.  
+  \begin{lstlisting}
+    package com.company;
+
+import java.util.LinkedList;
+import java.util.List;
+
+public class AVLComparableTree < T extends Comparable< ? super T>>{
+    private class AVLCNode< T>{
+        T element;
+        AVLCNode< T> left;
+        AVLCNode< T> right;
+        int height;
+        int count;
+        AVLCNode< T>(Integer value)
+        {
+            this(value,null,null);
+        }
+        AVLCNode< T>(T thiselement, AVLCNode< T> leftchild,AVLCNode< T> rightchild)
+        {
+            element = thiselement;
+            left = leftchild;
+            right = rightchild;
+            height = 0;
+            count=1;
+        }
+    }
+    private  AVLCNode< T> root;
+
+    public AVLTree()
+    {
+        root = null;
+    }
+
+    private int height( AVLCNode< T> node )
+    {
+        return node == null ? -1 : node.height;
+    }
+
+    public void insert(T x)
+    {
+        root = insert(x,root);
+    }
+
+    private AVLCNode< T> insert( T x, AVLCNode< T> node )
+    {
+        if( node == null )
+            return new AVLCNode< T>( x, null, null );
+
+        int compareResult = x.compareTo( node.val );
+
+        if( compareResult < 0 )
+        {
+            node.left = insert( x, node.left );//insert the value into the lefttree
+            if( height( node.left ) - height( node.right ) == 2 )//break the balance
+                if( x.compareTo( node.left.val ) < 0 )//LLtype
+                    node = rotateWithLeftChild( node );
+                else   //LRtype
+                    node = doubleWithLeftChild( node );
+        }
+        else if( compareResult > 0 )
+        {
+            node.right = insert( x, node.right );//insert the value into the righttree
+            if( height( node.right ) - height( node.left ) == 2 )//break the balance
+                if( x.compareTo( node.right.val ) > 0 )//RR type
+                    node = rotateWithRightChild( node );
+                else                           //RLtype
+                    node = doubleWithRightChild( node );
+        }
+        else
+        {
+            node.count++;
+        }
+        ;  // repeat doing nothing
+        node.height = Math.max( height( node.left ), height( node.right ) ) + 1;//update the height
+        return node;
+    }
+    private AVLCNode< T> rotateWithLeftChild( AVLCNode< T> k2 )
+    {
+        AVLCNode< T> k1 = k2.left;
+        k2.left = k1.right;
+        k1.right = k2;
+        k2.height = Math.max( height( k2.left ), height( k2.right ) ) + 1;
+        k1.height = Math.max( height( k1.left ), k2.height ) + 1;
+        return k1;
+    }
+
+    private AVLCNode< T> rotateWithRightChild( AVLCNode< T> k1 )
+    {
+        AVLCNode< T> k2 = k1.right;
+        k1.right = k2.left;
+        k2.left = k1;
+        k1.height = Math.max( height( k1.left ), height( k1.right ) ) + 1;
+        k2.height = Math.max( height( k2.right ), k1.height ) + 1;
+        return k2;
+    }
+
+    private AVLCNode< T> doubleWithLeftChild( AVLCNode< T> k3 )
+    {
+        k3.left = rotateWithRightChild( k3.left );
+        return rotateWithLeftChild( k3 );
+    }
+
+    private AVLCNode< T> doubleWithRightChild( AVLCNode< T> k1 )
+    {
+        k1.right = rotateWithLeftChild( k1.right );
+        return rotateWithRightChild( k1 );
+    }
+    private Integer Frequency(T seachelement,AVLCNode< T> node)
+    {
+        if(node ==null) return 0;
+        int compareResult = seachelement.compareTo( node.val );
+
+        if( compareResult < 0 ) return Frequency(seachelement,node.left);
+        else if(compareResult >0) return Frequency(seachelement,node.right);
+        else return node.count;
+    }
+    public List<T> inorderTraversal()
+    {
+        return inorderTraversal(root);
+    }
+
+    private List<T> inorderTraversal(AVLCNode< T> root) {
+
+        LinkedList<T> output = new LinkedList<>();
+        LinkedList<AVLCNode< T>> stack = new LinkedList<AVLCNode< T>>();
+        if (root == null) return output;
+        AVLCNode< T> current = root;
+        while (!stack.isEmpty() || current != null) {
+            while (current != null) {
+                stack.push(current);
+                current = current.left;
+            }
+            current = stack.pop();
+            while(current.count>0)
+            {
+                output.add(current.val);
+                current.count--;
+            }
+            current = current.right;
+        }
+        return output;
+    }
+}
+
+  \end{lstlisting}
+  \end{solution}
+\fi
+\end{itemize}
+\newproblem{Pruning Binary Trees}{10 points}
+
+\begin{enumerate}
+\item[(a)](5 points) You are given a binary tree. The task is to create a linear time algorithm {\sc Prune-Single}$(node)$ that removes all internal nodes with one child, 
+in the subtree rooted at $node$. Note that the leaf order should be preserved. Argue correctness and 
+runtime of your algorithm.
+\ifnum\me<2
+\begin{solution}   
+  \begin{code}
+    1 \textsc{Treenode PRUNE-SINGLE}$(Treenode\ node)$	\\
+    2 \> Prune-Single-subprogram(node,null,null)\\
+    3\>\Return node\\
+       \end{code}
+  \begin{code}
+    1 \textsc{Void Prune-Single-subprogram}$(node,parentnode,direction)$	\\
+    2 \> \If(node ==NULL) \Return; \\
+    3 \> \If(node has only one child and parentnode ==NULL and direction==NULL)\\
+    4 \>\>\Return;\\
+    5 \> \If(node.leftchild==NULL and node.rightchild!=NULL)\\
+    6 \>\> parentnode.direction = node.rightchild\\
+    7 \>\> Prune-Single-subprogram(parentnode.direction,parentnode,direction); \\
+    8 \> \If(node.rightchild==NULL and node.leftchild!=NULL)\\
+    9 \>\> parentnode.direction = node.leftchild\\
+    10 \>\> Prune-Single-subprogram(parentnode.direction,parentnode,direction); \\
+    11\>\ \Else: \\
+    12 \>\>Prune-Single-subprogram(node.leftchild,node,leftchild);\\
+    13 \>\>Prune-Single-subprogram(node.rightchild,node,rightchild);\\
+      \end{code}
+    \\[10pt] if the node is empty we just return null. If the rootnode has only one child, we will also leave it.
+    \\[10pt] if the node only has its rightchild, we will get its original place replaced by this rightchild. And keep looking into this rightchild.If the node only has its leftchild, we will get its original place replaced by this leftchild. And keep looking into this leftchild.
+    \\[10pt] If the node has its two children, we just keep looking into both of them.
+    \\[10pt] Since in the worst case no node is has only one child then we will check all nodes  one time. Then it is $O(n)$.
+ \end{solution}
+\fi
+\item[(b)](5 points) You are given a {\em Binary Search Tree}. Create a linear time algorithm {\sc Prune-Range}$(node,start,end)$ that 
+removes all nodes in the subtree rooted at $node$ whose key is not within the
+range $[start,end]$.
+Argue correctness and runtime of your algorithm. 
+
+\ifnum\me<2
+\begin{solution}   
+  \begin{code}
+    1 \textsc{Treenode PRUNE-RANGE}$(node,start,end)$	\\
+    2 \> Prune-Range-subprogram(node,start,end,null,null)\\
+    3\>\Return node\\
+       \end{code}
+  \begin{code}
+    1 \textsc{Void Prune-Range-subprogram}$(node,start,end,parentnode,direction)$	\\
+    2 \> \If(node ==NULL) \Return; \\
+    3 \> \If(node.value$<$start and parentnode==null)\\
+    4 \>\>Prune-Range-subprogram(node.right,start,end,node,right);\\
+    5 \>\>node.left =null \\
+    5 \> \If(node.value$>$end and parentnode==null)\\
+    6 \>\>Prune-Range-subprogram(node.left,start,end,node,left);\\
+    7\>\>node.right =null \\
+    8 \> \If(node.value$<$start and parentnode!=null)\\
+    9 \>\> parentnode.direction = node.right\\
+    10 \>\> Prune-Range-subprogram(parentnode.direction,start,end,parentnode,direction); \\
+    11 \> \If(node.value$>$end and parentnode!=null)\\
+    12 \>\> parentnode.direction = node.left\\
+    13 \>\> Prune-Range-subprogram(parentnode.direction,start,end,parentnode,direction); \\
+    14\>\ \Else: \\
+    15 \>\>Prune-Range-subprogram(node.left,start,end,node,left);\\
+    16 \>\>Prune-Range-subprogram(node.right,start,end,node,right);\\
+      \end{code}
+    
+    \\[10pt] We construct this by looking at each node. if the rootnode itself's value is less than the start, then we prune its leftchild to be null and kept looking into its rightchild.
+    if the rootnode itself's value is larger than the end, then we prune its rightchild to be null and kept looking into its leftchild.
+    \\[10pt] Then we look into the subtree nodes if the node is null we jsut return. If the node's value isless than the start, then we prune both itself and its leftchild, and get its original place raplaced by its rightchild.
+    If the node's value is larger than the end, then we prune both itself and its rightchild, and get its original place raplaced by its leftchild. Then we keep looking for its subtree.
+    \\[10pt] Since in the worst case no node is out of the range then we will check all nodes  one time. Then it is $O(n)$.
+  \end{solution}
+\fi
+\end{enumerate}
+
+\end{document}
+
+

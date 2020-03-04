@@ -1,0 +1,629 @@
+% me=0 student solutions (ps file), me=1 - my solutions (sol file),
+% me=2 - assignment (hw file)
+\def\me{0} \def\num{7} %homework number
+
+\def\due{Thursday, November 7} %due date
+
+\def\course{CSCI-GA.1170-001/002 Fundamental Algorithms} 
+%course name, changed only once
+
+% **** INSERT YOUR NAME HERE ****
+\def\name{jingshuai jiang}
+
+% **** INSERT YOUR NETID HERE ****
+\def\netid{jj2903}
+
+% **** INSERT NETIDs OF YOUR COLLABORATORS HERE ****
+\def\collabs{NetID1, NetID2}
+
+
+\iffalse
+
+INSTRUCTIONS: replace # by the homework number.  (if this is not
+ps#.tex, use the right file name)
+
+Clip out the ********* INSERT HERE ********* bits below and insert
+appropriate LaTeX code.  There is a section below for student macros.
+It is not recommended to change any other parts of the code.
+
+
+\fi
+%
+
+\documentclass[11pt]{article}
+
+
+% ==== Packages ====
+\usepackage{amsfonts,amsmath}
+\usepackage{latexsym}
+\usepackage{fullpage}
+\usepackage{graphicx}
+\usepackage{tikz}
+\usepackage[bottom]{footmisc}
+\usepackage{tikz-qtree}
+\usepackage{forest}
+
+% \setlength{\oddsidemargin}{.0in} \setlength{\evensidemargin}{.0in}
+% \setlength{\textwidth}{6.5in} \setlength{\topmargin}{-0.4in}
+\setlength{\footskip}{1in} \setlength{\textheight}{8.5in}
+
+\newcommand{\handout}[5]{
+\renewcommand{\thepage}{#1, Page \arabic{page}}
+  \noindent
+  \begin{center}
+    \framebox{ \vbox{ \hbox to 5.78in { {\bf \course} \hfill #2 }
+        \vspace{4mm} \hbox to 5.78in { {\Large \hfill #5 \hfill} }
+        \vspace{2mm} \hbox to 5.78in { {\it #3 \hfill #4} }
+        \ifnum\me=0
+        \vspace{2mm} \hbox to 5.78in { {\it Collaborators: \collabs
+            \hfill} }
+        \fi
+      } }
+  \end{center}
+  \vspace*{4mm}
+}
+
+\newcounter{pppp}
+\newcommand{\prob}{\arabic{pppp}} %problem number
+\newcommand{\increase}{\addtocounter{pppp}{1}} %problem number
+
+% Arguments: Title, Number of Points
+\newcommand{\newproblem}[2]{
+  \ifnum\me=0
+    \ifnum\prob>0 \newpage \fi
+    \increase
+    \setcounter{page}{1}
+    \handout{\name{} (\netid), Homework \num, Problem \arabic{pppp}}
+    {\today}{Name: \name{} (\netid)}{Due: \due}
+    {Solutions to Problem \prob\ of Homework \num\ (#2)}
+  \else
+    \increase
+    \section*{Problem \num-\prob~(#1) \hfill {#2}}
+  \fi
+}
+
+% \newcommand{\newproblem}[2]{\increase
+% \section*{Problem \num-\prob~(#1) \hfill {#2}}
+% }
+
+\def\squarebox#1{\hbox to #1{\hfill\vbox to #1{\vfill}}}
+\def\qed{\hspace*{\fill}
+  \vbox{\hrule\hbox{\vrule\squarebox{.667em}\vrule}\hrule}}
+\newenvironment{solution}{\begin{trivlist}\item[]{\bf Solution:}}
+  {\qed \end{trivlist}}
+\newenvironment{solsketch}{\begin{trivlist}\item[]{\bf Solution
+      Sketch:}} {\qed \end{trivlist}}
+\newenvironment{code}{\begin{tabbing}
+    12345\=12345\=12345\=12345\=12345\=12345\=12345\=12345\= \kill }
+  {\end{tabbing}}
+
+%\newcommand{\eqref}[1]{Equation~(\ref{eq:#1})}
+
+\newcommand{\hint}[1]{({\bf Hint}: {#1})}
+% Put more macros here, as needed.
+\newcommand{\room}{\medskip\ni}
+\newcommand{\brak}[1]{\langle #1 \rangle}
+\newcommand{\bit}[1]{\{0,1\}^{#1}}
+\newcommand{\zo}{\{0,1\}}
+\newcommand{\C}{{\cal C}}
+
+\newcommand{\nin}{\not\in}
+\newcommand{\set}[1]{\{#1\}}
+\renewcommand{\ni}{\noindent}
+\renewcommand{\gets}{=}
+\renewcommand{\to}{\rightarrow}
+\newcommand{\assign}{:=}
+
+\newcommand{\AND}{\wedge}
+\newcommand{\OR}{\vee}
+
+\newcommand{\For}{\mbox{\bf for }}
+\newcommand{\To}{\mbox{\bf to }}
+\newcommand{\DownTo}{\mbox{\bf downto }}
+\newcommand{\Do}{\mbox{\bf do }}
+\newcommand{\If}{\mbox{\bf if }}
+\newcommand{\Then}{\mbox{\bf then }}
+\newcommand{\Else}{\mbox{\bf else }}
+\newcommand{\While}{\mbox{\bf while }}
+\newcommand{\Repeat}{\mbox{\bf repeat }}
+\newcommand{\Until}{\mbox{\bf until }}
+\newcommand{\Return}{\mbox{\bf return }}
+\newcommand{\Halt}{\mbox{\bf halt }}
+\newcommand{\Swap}{\mbox{\bf swap }}
+\newcommand{\Ex}[2]{\textrm{exchange } #1 \textrm{ with } #2}
+\newcommand{\Nil}{\mbox{\bf nil }}
+
+
+\begin{document}
+
+\ifnum\me=0
+
+% Collaborators (on a per task basis):
+%
+% Task 1: *********** INSERT COLLABORATORS HERE *********** 
+% Task 2: *********** INSERT COLLABORATORS HERE *********** 
+% etc.
+%
+
+\fi
+
+\ifnum\me=1
+
+\handout{PS \num}{\today}{Lecturer: Yevgeniy Dodis}{Due: \due}
+{Solution {\em Sketches} to Problem Set \num}
+
+\fi
+
+\ifnum\me=2
+
+\handout{PS \num}{\today}{Lecturer: Yevgeniy Dodis}{Due: \due}{Problem
+  Set \num}
+
+\fi
+
+\newproblem{Maximize Your Scores}{(23+3)}
+You are a student of a course ``Not-So-Fundamental Algorithms''. You have 
+been diligently submitting the solutions to various homework questions and
+have been assigned scores for each of them. Let us assume that there are $n$ such
+questions and you are given the scores as an array $A[1\ldots n]$. 
+These scores can be positive or negative. 
+(The grading has been a bit harsh, probably
+done by the recitation leader). 
+As a result, you are being allowed to pick the homework questions 
+you want to count towards your homework component of the final grade.
+Clearly, your goal is to maximize the sum of the scores
+you pick. However, there are some additional conditions imposed on how you pick
+this subset. 
+\begin{enumerate}
+	\item[(a)](1 point) Warm-up Question: You are not told any prior information
+	about the values in the array $A$. You are just asked to pick any or none of the
+	scores. You have to provide the indices $i_1,i_2,\ldots i_k$ 
+	and the final score would
+	be $\sum_{j=1}^k A[i_j]$. You may also choose to pick none of the scores. 
+	(When does this happen?) 
+	Give me a $\Theta(n)$ solution to return the set
+	of indices so that you maximize the final score. 
+	\ifnum\me<2
+\begin{solution}  
+By traversing the array, if all of the scores are negative,then we will pick none of the scores. Otherwise return all the indexs which its related score is positive.
+\begin{code}
+  1 {\sc FinalMax}($A$)\\
+  2 \> ans = new list\\
+  3 \> \For $i=1$ \To $n$\\
+  4 \>\> \If A[i] $>$ 0\\
+  5 \>\>\> ans.add(i)\\
+  6 \> \Return ans\\
+  \end{code}
+\end{solution}
+	\fi
+	\end{enumerate}
+For parts (b)-(e), you are constrained to pick only continuous scores, i.e pick
+a subarray from the array $A$. You have to provide two indices $i,j$ 
+and the final score will be $\sum_{k=i}^j A[k]$. 
+\begin{enumerate}
+	\item [(b)] (1 point) You are told that $\forall i,~A[i]\geq 0$.
+	What will your strategy be? Give me a $\Theta(1)$ solution to
+	return the two indices $i,j$. Justify your strategy briefly. 
+	\ifnum\me<2
+\begin{solution}   
+Strategy: We just take all of the indexs in that array. 
+$i=1,\ j=n$
+\\[10pt]Since every score in this array is positive, if we ignore any index, the sum of these indexes won't be as big as taking all these indexes. Then we just need to take all the indexes.
+\end{solution}
+	\fi
+	\item[(c)] (3 points) You have no information about the values in the array
+	$A$. Fill in the blanks to complete the following iterative algorithm that 
+	returns the maximum possible score. It is easy to see that this
+	algorithm will have a run-time of $O(n^2)$. 
+	\begin{code}
+	1 {\sc GetMVCS}($A,n$)\\
+	2 \> $maxsum=0$\\
+	3 \> \For $i=1$ \To $n$\\
+	4 \> \> $current=\ldots\ldots\ldots\ldots\ldots$\\
+	5 \> \> \For $j=i$ \To $n$ \\
+	6 \> \> \> $\ldots\ldots\ldots\ldots\ldots\ldots\ldots$\\
+	7 \> \> \> \If $\ldots\ldots\ldots\ldots$ \Then $\ldots\ldots\ldots\ldots\ldots\ldots\ldots$\\
+	8 \> \Return $maxsum$
+	\end{code}
+	\ifnum\me<2
+\begin{solution}   
+    \begin{code}
+        1 {\sc GetMVCS}($A,n$)\\
+        2 \> $maxsum=0$\\
+        3 \> \For $i=1$ \To $n$\\
+        4 \> \> $current=0$\\
+        5 \> \> \For $j=i$ \To $n$ \\
+        6 \> \> \> $current = current+A[j]$\\
+        7 \> \> \> \If $current > maxsum$ \Then $maxsum = current$\\
+        8 \> \Return $maxsum$
+        \end{code}
+  \end{solution}
+	\fi
+ 	\item[(d)] (5 points) Consider the problem as defined in Part (c). Construct an $O(n)$ time and $O(n)$ space algorithm using dynamic programming. 
+ 	Justify the runtime of your algorithm. Briefly argue the correctness
+ 	of your algorithm. 
+ 	The algorithm will utilize a one-dimensional
+ 	array $M$ of length $n$. Clearly define $M[i]$ to help formulate the 
+ 	\textbf{\emph{bottom-up}} algorithm.
+ 	
+ \hint{Note that you have a running window. What does
+ 	it mean to extend this window by one?}
+ 	\ifnum\me<2
+\begin{solution}  
+    In this question 
+    \\[10pt]Define:M[i] to be the maximum value of a continuous subarray finished at A[i].
+    \begin{equation}
+        M[i]=\left\{
+        \begin{aligned}
+        Max(A[1],0) & &\text{i=1}\\
+        Max(A[i],M[i-1]+A[i]) & &\text{$2 \le i \le n$}\\
+        \end{aligned}
+        \right.
+        \end{equation}
+    \begin{code}
+        1 {\sc GetMVCS}($A,n$)\\
+        2 \> $maxsum=0$\\
+        3 \> \If n=0 \Return 0\\
+        4 \> M[] = new Array of length n\\
+        5 \> M[1] = max(A[1],0)\\
+        6 \> maxsum = M[1]\\
+        7 \> \For $i=2$ \To $n$\\
+        8 \> \> M[i] = Max(A[i],M[i-1]+A[i])\\
+        9 \> \> \If $M[i] > maxsum$ \Then $maxsum = M[i]$\\
+        10 \> \Return $maxsum$
+        \end{code}
+         we all know that if an array starts with a negative element, its sum will be greater if we delete the first element. \\[10pt]
+        If we only have one element in the given array A we should compare it with 0,if it is greater than 0 then we will take it,otherwise we take nothing.\\[10pt]
+        Induction:Assume it is true that the maximum value of an array end with A[i-1] is M[i-1], then when calcuating the sum of array end at A[i], if this M[i-1] is negative ,we won't use A[i-1] as the prefix of our array. We will just use the A[i], the one element array, which starts at A[i] and end at A[i].So it is true for M[i]\\[10pt]
+        In this algorithm i construct a O(n) space array of M, one space to record the maximum value. And O(n) space time. Because we just have one loop from 2 to n, and each step costs O(1) time. Then the total runtime should be $O(n)$.
+  \end{solution}
+ 	\fi
+ 	\item[(e)] (3 points) Typically, one uses a helper value to help reconstruct the optimal solution for a dynamic programming problem. However, for this question, one
+ 		 does not need to do that. Indeed, it is not hard to modify the problem from 
+ 		 Part (d) to also print the optimal solution. For this question, you will construct
+ 		 an algorithm {\sc Print-Solution}$(M)$ that takes
+ 		 as input the array $M$ from before and prints the solution, i.e, give the starting 
+ 		 and ending indices of the contiguous subarray that yields the maximum value. This 
+ 		 will have to be a $O(n)$ algorithm.
+ 	\ifnum\me<2
+\begin{solution}  
+    \begin{code}
+        1 {\sc PRINT-SOLUTION}($M$)\\
+        2 \> $maxsum=0$\\
+        3 \> $endindex=1$\\
+        4 \> $startindex=1$\\
+        5 \> \For $i=1$ \To $n$\\
+        6 \> \> \If $M[i] > maxsum$ \Then $maxsum = M[i]$,$endindex = i$\\
+        7 \> \For $j=endindex$ down \To $1$\\
+        8 \> \> \If $M[j] \le 0$ \Then $startindex = j+1, break;$\\
+        9 \> \Return startindex,endindex\\
+        \end{code}
+        In this algorithm we first traversing the whole M to find the index whose value is the highest in this array M. Since M represents the maximum array end with A[i]. If this M[i] is highest, then the array 
+        ends with A[i] will also has a highest value. Then this i should be the endindex.\\
+        Then we start with this endindex and moving to 1 to see if there is anyindex that is smaller than or equal to 0. Then the next index of this one should be the startindex.\\
+        This algorithm will traversing the whole array in two times ,then it is $O(2n) = O(n)$
+
+  \end{solution}
+ 	 \fi
+
+
+\item[(f)] (5 points) For this question, you are given a constant $k<n$. You have 
+ to choose $k$ 
+scores such that you maximize your sum, i.e, find a subset of $A$ of size $k$ such
+that it has the maximum sum across all possible subsets of size $k$. These scores need \emph{not
+be continuous}. Construct an $O(nk)$
+space and time algorithm using dynamic programming to return the maximum sum. Justify
+the runtime of your algorithm. Briefly argue the correctness of your algorithm. The algorithm
+will utilize a two-dimensional array $M$. You might find it helpful to index this
+array starting at 0. Clearly define $M[i][j]$ to help formulate the
+\emph{bottom-up} algorithm. 
+\ifnum\me<2
+\begin{solution}   
+    Define M[i] to be the maximum k elements till A[i], M[i][j] means the jth maximum element till A[i]
+    \begin{code}
+        1 {\sc MaximumKElements}($A,k$)\\
+        2 \> (this n is A's length)let M[n][k] be new array all of them equal to $-\infty$\\
+        3 \> sum =0\\
+        4 \>  M[1][1] = A[1], M[1][2..k] = -$\infty$ \\
+        5 \> \For $i=2$ \To $n$\\
+        6 \> \> flag = 0\\
+        6 \> \> \For $j=1$ \To $k$\\
+        8 \> \> \>\If flag = 0\\
+        9 \> \> \> \>\If $A[i] > M[i-1][j]$ \Then $M[i][j] = A[i]; flag =1$\\
+        10 \> \> \> \>\Else M[i][j] = M[i-1][j-1]\\
+        11 \> \> \>\Else \If flag =1 \ Then M[i][j] = M[i-1][j-1]\\
+        12 \>  \For $j=1$ \To $k$\\
+        13 \> \>  sum+=M[n][j]\\
+        14 \> \Return sum\\
+        \end{code}
+    Space:In this algorithm we define an extra space of an array of O(nk), and a space to record the greatest sum of these k element. The total space is O(kn+1) = O(nk)\\[10pt]
+    Time:We fullfill the array of M one by one. And each of them takes O(1) time. The Whole time is O(kn+k) = O(kn)\\[10pt]
+    Correctness:We just construct an algorithm that records the k maximum elements till now. If the current element is bigger than M[i-1][j], then we update M[i][j] with the new one and update the following elements M[i][j..k].
+    If not we will just take the M[i-1][j] as the current value of M[i][j].\\[10pt]
+    Induction: Assume it is true for p < n. When p = n, if A[n] is bigger than M[n-1][j], we update this M[n][j] ,and the following will use the M[n-1][j-1] as the bigger number. If A[n] is not bigger than any M[n-1][j], then M[n][j] will remain the same.\\
+
+   \end{solution}
+\fi
+ 	\item[(g)] (5 points) 
+ 	For this question, you are constrained to pick your scores in such a way that 
+you \emph{you cannot pick two adjacent scores} 
+i.e, if index $i$ is picked, indices $i+1$ and $i-1$ cannot be picked. \emph{You need to 
+pick at least one score}. 
+ Construct an $O(n)$ time and $O(n)$ space algorithm using dynamic programming. 
+ 	Justify the runtime of your algorithm. Briefly argue the correctness
+ 	of your algorithm. 
+ 	The algorithm will utilize a one-dimensional
+ 	array $M$ of length $n$. It might be useful to define $M[0]$ as a base case. Clearly define $M[i]$ to help formulate the 
+ 	\textbf{\emph{top-down}} algorithm.
+	\ifnum\me<2
+\begin{solution}   
+    \begin{code}
+        1 {\sc DynamicPick}($A$)\\
+        n is the length of A\\
+        2 \> let M[0...n] be new array\\ 
+        3 \> M[0] = 0\\
+        4 \>M[1] = max(0,A[1])\\
+        5 \>ans= DynamicCore(A,M,A.length)\\
+        6 \> \If ans = 0\\
+        7 \> \> maximum = minimum we can represent\\
+        8 \> \> \For i = 1 to n\\
+        9 \>\> \If A[i] $>$ maximum\\
+        10 \>\>\> maximum = A[i]\\
+        11 \>\>\Return maximum\\
+        12 \>\Else \Return ans\\
+        
+        \end{code}
+     \begin{code}
+        1 {\sc DynamicCore}($A,M,n$)\\
+        2 \>\If M[n] $ \ge 0$ \Return M[n]\\
+        3 \> q = max(DynamicCore(A,M,n-1),DynamicCore(A,M,n-2)+A[n])\\
+        4 \> M[n] = q\\
+        5 \> return q\\
+     \end{code}
+    In this code we define M[i] to be the maximum positive sum of picked value till A[i]. \\
+    Basecase:M[0] = 0, M[1] =max(A[1],0)
+    Assume it is true for M[i-1], then we have two choices the first is that if we pick A[i-1], then we can not pick A[i],we just inherited the M[i-1]. Second if we do pick A[i], then we will add them to M[i-2], but i like to take the maximum of these two situations.
+    Then it is true that M[i] = max(M[i-1]，M[i-2]+A[i])\\
+    In the question we are told to pick at least one element. So if the M[n] = 0 which means all the numbers in array A are negative. Then we can not just return M[n], we need to pick the maximum value of array A and return it.
+    \begin{equation}
+        M[i]=\left\{
+        \begin{aligned}
+        0 & &\text{i=0}\\
+        Max(A[1],0) & &\text{i=1}\\
+        Max(A[i]+M[i-2],M[i-1]) & &\text{$2 \le i \le n$}\\
+        \end{aligned}
+        \right.
+        \end{equation}  
+\end{solution}
+	\fi
+
+	\item[(h)] (\textbf{Extra Credit})(3 points) For this question, you are constrained to pick your scores in such a way that 
+you \emph{you cannot pick three adjacent scores} 
+i.e, if index $i$ is picked then you cannot pick both of the in the indices in
+the following pairs of indices $(i-1,i+1),(i-2,i-1),(i+1,i+2)$. \emph{You need to 
+pick at least one score}. 
+ Construct an $O(n)$ time and $O(n)$ space algorithm using dynamic programming. 
+ 	Justify the runtime of your algorithm. Briefly argue the correctness
+ 	of your algorithm. 
+ 	The algorithm will utilize a one-dimensional
+ 	array $M$ of length $n$. It might be easier to define $M[0]$ as a base case.
+ 	Clearly define $M[i]$ to help formulate a 
+ 	\textbf{\emph{top-down}} algorithm.
+	\ifnum\me<2
+\begin{solution}   
+		\begin{code}
+ 			1 {\sc GetMVCS-G}($A,n$)\\
+      2 \> let M[0...n]be new array and equal to $- \infty$ \\
+      3 \> M[0] = 0\\
+      4 \> \Return GetMVCS-G-Core(A,M,n)\\
+     \end{code}
+     \begin{code}
+     1 {\sc GetMVCS-G-Core}($A,M,n$)\\
+     2 \> \If n=1 then M[1] = A[1]\\
+     3 \> \If n=2 then M[1] = A[1] ;M[2] = max(A[1],A[2],A[1]+A[2])\\
+     4 \>\> \If M[n]!=0 return M[n]\\
+     4 \> \If n$>$2 \\
+     5 \>\> a = GetMVCS-G-Core(A,M,n-3) +A[n]+A[n-1]\\
+     6 \>\> b = GetMVCS-G-Core(A,M,n-2) +A[n]\\
+     7 \>\> c = GetMVCS-G-Core(A,M,n-1)\\
+     8 \>\> M[n] = max(a,b,c)\\
+     5 \> \Return M[n]\\
+    \end{code}
+\end{solution}
+	\fi
+\end{enumerate}
+
+\newproblem{Fibonacci in Linear Time}{7+3 points}
+\noindent
+Recall, Fibonacci number $F_0,F_1,F_2,...$ are defined by setting
+$F_0=0,\ F_1=1$, and $F_i = F_{i-1} + F_{i-2}$, for $i\ge 2$. Ignoring the
+issue of $F_n$ being exponentially large, one can easily compute $F_n$
+in linear time:
+\begin{code}
+\> $F_0 = 0,\ F_1 = 1$ \\
+\> \For $i = 2$ \To $n$ \\
+\> \> $F[i] := F[i-1] + F[i-2]$
+\end{code}
+\begin{itemize}
+\item[(a)] (1 point) Complete the blanks to provide a {\em recursive} algorithm
+that computes $F_n$. 
+\begin{code}
+{\sc Fib}$(n)$:\\
+\> \If $\ldots\ldots\ldots\ldots\ldots\ldots\ldots$ \Return $\ldots\ldots\ldots\ldots\ldots$\\
+\> \Else \If $\ldots\ldots\ldots\ldots\ldots\ldots\ldots$ \Return $\ldots\ldots\ldots\ldots\ldots$\\
+\> \Else \Return $\ldots\ldots\ldots\ldots\ldots\ldots\ldots$
+\end{code}
+\ifnum\me<2
+\begin{solution}   
+    \begin{code}
+        {\sc Fib}$(n)$:\\
+        \> \If $ n=0 \Return 0$\\
+        \> \Else \If $n=1$ \Return $1$\\
+        \> \Else \Return $Fib(n-1)+Fib(n-2)$
+        \end{code}
+ \end{solution}
+\fi
+\item[(b)] (3 points) Let $T(n)$ be the running time of {\sc Fib}$(n)$. 
+What is the recurrence
+relation for the running time of this recursive procedure? 
+Do not forget to write the base case(s) of your recurrence relation. You may assume that addition and the \If statement can be accomplished in constant time.
+
+Prove by induction that $T(n) \ge
+c^n$, for some constant $c>1$. What is the largest value of $c$ that
+you can use in your induction?
+\ifnum\me<2
+\begin{solution}   INSERT YOUR SOLUTION HERE   \end{solution}
+\fi
+\item[(c)] (3 points) You will now write a variant of the recursive procedure. Let us 
+call it {\sc Smart-Fib} which will compute
+$F_n$ in time $O(n)$, like we expect a good procedure should. You will use memoization
+to achieve the speed-up. More formally, you {\em will use }an array $A[1\ldots n]$ to memoize. 
+
+\ifnum\me<2
+\begin{solution}   
+    \begin{code}
+        {\sc Smart-Fib}$(n)$:\\
+        \> let A[0...n] be a new array\\
+        \> \For i = 0 to n\\
+        \>\> A[i] = $-\infty$\\
+        \> \Return SmartCore(n,A)\\
+        \end{code}
+        \begin{code}
+            {\sc SmartCore}$(n,A)$:\\
+            \> \If A[n]$\ge 0$\\
+            \>\> return A[n]\\
+            \> \If n= 0 or n=1 \\
+            \>\> q=1\\
+            \> \Else q = SmartCore(n-1,A)+SmartCore(n-2,A) \\
+            \>A[n] = q\\
+            \> \Return q\\
+            \end{code}
+    In this code i utilized an array A to memoize all the value which has already show up before. The SmartCore procedure do the following steps: if n =0 or 1 just return 1. else if R[n] has already has a value. Then we just return it. If we do not have a value.Then all we have to do is to look into this array and take out two previous numbers ,add them together,and put it back into as a new one.\\
+    In this code each Fib(n) has only be calcuated for one time. The others will be readed from the array. The whole running time should be O(n). And we use an O(n) space.
+  \end{solution}
+\fi
+\item[(d)] \textbf{(Extra Credit)} (3 points) The above algorithm runs in $O(n)$ time
+but also uses $O(n)$ space. Provide an iterative variant of the above recursive procedure
+which will run in $O(n)$ time but will only use constant additional memory. Let us call it
+algorithm \textsc{Super-Smart-Fib}. 
+\ifnum\me<2
+\begin{solution}   
+    \begin{code}
+        {\sc Super-Smart-Fib}$(n)$:\\
+        \> \If n \le 1$\\
+        \>\> return n\\
+        \> pre = 1\\
+        \>ppre = 0\\
+        \> a =0\\
+        \> \For i=2 to n \\
+        \>\> a = pre+ppre\\
+        \> \> ppre = pre\\
+        \> \> pre = a\\
+        \> \Return pre\\
+        \end{code}
+\end{solution}
+\fi
+\end{itemize}
+\newproblem{Counting BSTs}{8 points}
+\noindent Let us recall the definition of 
+{\em binary search tree property}: Let $x$ be a node
+in a binary search tree. If $y$ is a node in the left subtree of $x$, then 
+$y.key\leq x.key$. If $y$ is a node in the right subtree of $x$, then $y.key\geq x.key$. 
+
+The goal of this question is to count the number of possible BSTs with $n$ distinct
+nodes. For simplicity you may assume that the possible labels are $[1\ldots n]$. 
+
+For example, when $n=1$, you know that the only possibility is just a root which
+is also the leaf. However, for $n=2$, we have two choices for the root: We can make 2 
+the root and 1 its left child or make 1 the root and 2 its right child.
+\begin{itemize}
+\item[(a)](2 points) Illustrate all the possible BSTs for $n=3$.
+\ifnum\me<2
+\begin{solution}   
+    \begin{forest}
+        [2
+          [1] 
+          [3]             
+        ] 
+      \end{forest}
+      \begin{forest}
+        [1
+          [null] 
+          [2
+          [null]
+          [3]
+          ]             
+        ] 
+      \end{forest}
+      \begin{forest}
+        [3
+          [2 [1][null]]
+          [null]
+          
+          ]             
+        ] 
+      \end{forest}
+      \begin{forest}
+        [3
+          [1 [null][2]]
+          [null]
+          
+          ]             
+        ] 
+      \end{forest}
+      \begin{forest}
+        [1
+          [null] 
+          [3
+          [2]
+          [null]
+          ]             
+        ] 
+      \end{forest}
+   \end{solution}
+There are totally 5 possible BSTs. 
+\fi 
+\item[(b)](3 points) Let $F_n$ denote the number of
+possible BSTs with $n$ elements. How many trees are possible
+with $i$ as the root? Use this to write a recursive formulation
+for computing $F_n$. \hint{If $i$ is the root, what are the possible
+elements that can occur in the left child and what about the ones on the right
+child?}
+\ifnum\me<2
+\begin{solution}   
+$$F(n) = \sum_{i=1}^n F(i-1)*F(n-i)$$
+and we have $$F(0)=1,F(1)=1$$
+\end{solution}
+\fi
+\item[(c)](3 points) Use the above formulation to write a {\em recursive} algorithm (top-down) based
+on Dynamic Programming to compute the value of $F_n$. You may find it useful to 
+declare a global array $M[1\ldots n]$. Assume that the array can store the large values of $F$. 
+\ifnum\me<2
+\begin{solution}   
+    \begin{code}
+        {\sc F}$(n)$:\\
+        \> let M[1...n] be a new array\\
+        \> \For i = 1 to n\\
+        \>\> M[i] = $-\infty$\\
+        \> \Return FCore(n,M)\\
+        \end{code}
+        \begin{code}
+            {\sc FCore}$(n,M)$:\\
+            \> q=0\\
+            \> \If M[n]$\ge 0$\\
+            \>\> return M[n]\\
+            \> \If n= 0 or n=1 \\
+            \>\> q=1\\
+            \> \Else \For i=n down to 1 \\
+            \> \> q = q+FCore(i-1,M) \cdot FCore(n-i,M) \\
+            \>M[n] = q\\
+            \> \Return q\\
+            \end{code}
+    In this algorithm i use the array M[i] to denote the F[i]. Each time if we finish calcualte the F[i], i will put it into the M[i], then the subprogram will just look into the array and avoid calcuating it again.
+    
+\end{solution}
+\fi
+\end{itemize}
+\end{document}
+
+
