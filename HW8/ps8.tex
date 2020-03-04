@@ -1,0 +1,526 @@
+% me=0 student solutions (ps file), me=1 - my solutions (sol file),
+% me=2 - assignment (hw file)
+\def\me{0} \def\num{8} %homework number
+
+\def\due{5 pm on Thursday, November 14} %due date
+
+\def\course{CSCI-GA.1170-001/002 Fundamental Algorithms} 
+%course name, changed only once
+
+% **** INSERT YOUR NAME HERE ****
+\def\name{jingshuai jiang}
+
+% **** INSERT YOUR NETID HERE ****
+\def\netid{jj2903}
+
+% **** INSERT NETIDs OF YOUR COLLABORATORS HERE ****
+\def\collabs{NetID1, NetID2}
+
+
+\iffalse
+
+INSTRUCTIONS: replace # by the homework number.  (if this is not
+ps#.tex, use the right file name)
+
+Clip out the ********* INSERT HERE ********* bits below and insert
+appropriate LaTeX code.  There is a section below for student macros.
+It is not recommended to change any other parts of the code.
+
+
+\fi
+%
+
+\documentclass[11pt]{article}
+
+
+% ==== Packages ====
+\usepackage{amsfonts,amsmath}
+\usepackage{latexsym}
+\usepackage{fullpage}
+\usepackage{graphicx}
+\usepackage{tikz}
+\usepackage[bottom]{footmisc}
+
+
+% \setlength{\oddsidemargin}{.0in} \setlength{\evensidemargin}{.0in}
+% \setlength{\textwidth}{6.5in} \setlength{\topmargin}{-0.4in}
+\setlength{\footskip}{1in} \setlength{\textheight}{8.5in}
+
+\newcommand{\handout}[5]{
+\renewcommand{\thepage}{#1, Page \arabic{page}}
+  \noindent
+  \begin{center}
+    \framebox{ \vbox{ \hbox to 5.78in { {\bf \course} \hfill #2 }
+        \vspace{4mm} \hbox to 5.78in { {\Large \hfill #5 \hfill} }
+        \vspace{2mm} \hbox to 5.78in { {\it #3 \hfill #4} }
+        \ifnum\me=0
+        \vspace{2mm} \hbox to 5.78in { {\it Collaborators: \collabs
+            \hfill} }
+        \fi
+      } }
+  \end{center}
+  \vspace*{4mm}
+}
+
+\newcounter{pppp}
+\newcommand{\prob}{\arabic{pppp}} %problem number
+\newcommand{\increase}{\addtocounter{pppp}{1}} %problem number
+
+% Arguments: Title, Number of Points
+\newcommand{\newproblem}[2]{
+  \ifnum\me=0
+    \ifnum\prob>0 \newpage \fi
+    \increase
+    \setcounter{page}{1}
+    \handout{\name{} (\netid), Homework \num, Problem \arabic{pppp}}
+    {\today}{Name: \name{} (\netid)}{Due: \due}
+    {Solutions to Problem \prob\ of Homework \num\ (#2)}
+  \else
+    \increase
+    \section*{Problem \num-\prob~(#1) \hfill {#2}}
+  \fi
+}
+
+% \newcommand{\newproblem}[2]{\increase
+% \section*{Problem \num-\prob~(#1) \hfill {#2}}
+% }
+
+\def\squarebox#1{\hbox to #1{\hfill\vbox to #1{\vfill}}}
+\def\qed{\hspace*{\fill}
+  \vbox{\hrule\hbox{\vrule\squarebox{.667em}\vrule}\hrule}}
+\newenvironment{solution}{\begin{trivlist}\item[]{\bf Solution:}}
+  {\qed \end{trivlist}}
+\newenvironment{solsketch}{\begin{trivlist}\item[]{\bf Solution
+      Sketch:}} {\qed \end{trivlist}}
+\newenvironment{code}{\begin{tabbing}
+    12345\=12345\=12345\=12345\=12345\=12345\=12345\=12345\= \kill }
+  {\end{tabbing}}
+
+%\newcommand{\eqref}[1]{Equation~(\ref{eq:#1})}
+
+\newcommand{\hint}[1]{({\bf Hint}: {#1})}
+% Put more macros here, as needed.
+\newcommand{\room}{\medskip\ni}
+\newcommand{\brak}[1]{\langle #1 \rangle}
+\newcommand{\bit}[1]{\{0,1\}^{#1}}
+\newcommand{\zo}{\{0,1\}}
+\newcommand{\C}{{\cal C}}
+
+\newcommand{\nin}{\not\in}
+\newcommand{\set}[1]{\{#1\}}
+\renewcommand{\ni}{\noindent}
+\renewcommand{\gets}{\leftarrow}
+\renewcommand{\to}{\rightarrow}
+\newcommand{\assign}{:=}
+
+\newcommand{\AND}{\wedge}
+\newcommand{\OR}{\vee}
+
+\newcommand{\For}{\mbox{\bf for }}
+\newcommand{\To}{\mbox{\bf to }}
+\newcommand{\DownTo}{\mbox{\bf downto }}
+\newcommand{\Do}{\mbox{\bf do }}
+\newcommand{\If}{\mbox{\bf if }}
+\newcommand{\Then}{\mbox{\bf then }}
+\newcommand{\Else}{\mbox{\bf else }}
+\newcommand{\While}{\mbox{\bf while }}
+\newcommand{\Repeat}{\mbox{\bf repeat }}
+\newcommand{\Until}{\mbox{\bf until }}
+\newcommand{\Return}{\mbox{\bf return }}
+\newcommand{\Halt}{\mbox{\bf halt }}
+\newcommand{\Swap}{\mbox{\bf swap }}
+\newcommand{\Ex}[2]{\textrm{exchange } #1 \textrm{ with } #2}
+\newcommand{\Nil}{\mbox{\bf nil }}
+\newcommand{\True}{\textsf{True}}
+\newcommand{\False}{\textsf{False}}
+\begin{document}
+
+\ifnum\me=0
+
+% Collaborators (on a per task basis):
+%
+% Task 1: *********** INSERT COLLABORATORS HERE *********** 
+% Task 2: *********** INSERT COLLABORATORS HERE *********** 
+% etc.
+%
+
+\fi
+
+\ifnum\me=1
+
+\handout{PS \num}{\today}{Lecturer: Yevgeniy Dodis}{Due: \due}
+{Solution {\em Sketches} to Problem Set \num}
+
+\fi
+
+\ifnum\me=2
+
+\handout{PS \num}{\today}{Lecturer: Yevgeniy Dodis}{Due: \due}{Problem
+  Set \num}
+
+\fi
+
+\newproblem{Texting---A Long Time Ago}{16 (+6) Points}
+
+\noindent
+You may or may not be old enough to remember how people used to write
+text messages a while back: on a standard issue phone, the $N = 26$
+letters would be assigned in groups of three or four to the $K = 8$
+keys $\textcircled {\footnotesize 2}$ to
+$\textcircled {\footnotesize 9}$ on the dial pad, and in order to type
+the $l^{\text{th}}$ letter on a particular key, one would tap that key
+$l$ times in rapid succession.
+
+Consider a text for which the frequency $f_i \in \mathbb N$ of each
+letter $i = 1,\ldots,N$ is known.%
+\footnote{For simplicity letters are denoted by numbers in the
+  remainder of this task.} %
+Typing this text on a phone would require
+$T = \sum_{i=1}^N p_i \cdot f_i$ taps, where $p_i$ is the position of
+letter $i$ on its key.  Clearly, if one wishes to minimize $T$, the
+optimal assignment of letters to keys---in alphabetical
+order---depends on the text in question; more precisely, on the
+frequencies $f_i$.  In particular, having groups of just three or four
+letters may be suboptimal.
+
+In this task you will develop an algorithm that given (general) $K$,
+$N$, and frequencies $f_1,\ldots,f_N$ finds an assignment of the
+letters $1,\ldots,N$ in alphabetical order to the keys $1,\ldots,K$
+such that $T$ is minimized.%
+
+\begin{itemize}
+  \item[(a)] (4 points) For $1 \leq i \leq j \leq N$, let
+  $C[i,j] := \sum_{k=i}^j (k-i+1) \cdot f_k$, which is the number of
+  taps required to type only the letters $i,\ldots,j$ in the text if
+  they are all assigned to a single key (in alphabetical order).
+
+  Provide pseudocode of an $O(N^2)$ algorithm that fills the entire
+  array $C[\cdot,\cdot]$.  Ignore cells $C[i,j]$ where $i > j$.
+
+  \ifnum\me<2
+\begin{solution}  
+  \begin{code}
+    1 $\textsc{FillArrayC}(N,C,f)$ \\
+    2\> \For i= 1 to N \\
+    3\>\> \For j = i to N\\
+    4 \>\>\> C[i,j] = $(j-i+1)\cdot f[j]+C[i,j-1]$\\
+    5\> \Return C\\
+  \end{code}
+This is a $O(n^2)$ runtime code.
+\end{solution}
+  \fi
+\end{itemize}
+
+\noindent
+For $1 \leq n \leq N$ and $1 \leq k \leq K$, define $T[n,k]$ to be the
+smallest possible number of taps required to type only the letters
+$1,\ldots,n$ in the text if they are assigned to keys $1,\ldots,k$.
+
+\begin{itemize}
+  \item[(b)] (2 points) For $n = 1,\ldots,N$, what is $T[n,1]$ (in
+  terms of $C$)?
+
+  \ifnum\me<2
+\begin{solution}   
+$$T[n,1] = C[1,n]$$
+\end{solution}
+  \fi
+
+  \item[(c)] (5 points) Derive a recurrence relation for $T[n,k]$ and
+  justify it.  Note that in (b) you considered the base case of this
+  recurrence.
+
+  \ifnum\me<2
+\begin{solution}   
+
+  \begin{equation}
+    T[n,k]=\left\{
+    \begin{aligned}
+    C[1,n] & &\text{k=1}\\
+    $\min \limits_{k-1 \le i \le n-1} T[i,k-1]+c[i+1,n]$ & &\text{$2 \le k \le K \ and\ k \le n \le N$}\\
+    \end{aligned}
+    \right.
+    \end{equation}
+
+\end{solution}
+  \fi
+\end{itemize}
+
+\noindent
+In the following you may assume that you have direct access to the
+filled array $C[\cdot,\cdot]$.
+
+\begin{itemize}
+  \item[(d)] (4 points) Devise a polynomial-time (in $N$ and $K$)
+  algorithm $\textsc{Phone-TD}(N,K)$ (write pseudocode) that fills
+  table $T[\cdot,\cdot]$ in a top-down, recursive fashion \emph{with
+    memoization}.
+ Fill in the blanks to complete the algorithm. 
+ \begin{code}
+  1 $\textsc{Phone-TD}(N,K)$ \\
+  2\> initialize $T[\cdot,\cdot]$ with all entries $\infty$ \\
+  3\> \Return $\textsc{Phone-TD-Aux}(N,K,T)$
+\end{code}
+\begin{code}
+  1\> $\textsc{Phone-TD-Aux}(N,K,T)$ \\
+  2\>\> \If $T[N,K] \neq \infty$ \\
+  3\>\>\> $\ldots\ldots\ldots\ldots\ldots\ldots\ldots$ \\
+  4\>\> \If $\ldots\ldots\ldots\ldots\ldots\ldots\ldots$ \\
+  5\>\>\> $q = \ldots\ldots\ldots\ldots\ldots$ \\
+  6\>\> \Else \\
+  7\>\>\> $q = \ldots\ldots\ldots\ldots\ldots$ \\
+  8\>\>\> \For $l = \ldots\ldots\ldots\To \ldots\ldots$ \\
+  9\>\>\>\> $q = \ldots\ldots\ldots\ldots\ldots$ \\
+  10\>\> $T[N,K] = q$ \\
+  11\>\> \Return $q$
+\end{code}
+  \ifnum\me<2
+\begin{solution}   
+  \begin{code}
+    1 $\textsc{Phone-TD}(N,K)$ \\
+    2\> initialize $T[\cdot,\cdot]$ with all entries $\infty$ \\
+    3\> \Return $\textsc{Phone-TD-Aux}(N,K,T)$
+  \end{code}
+  \begin{code}
+    1\> $\textsc{Phone-TD-Aux}(N,K,T)$ \\
+    2\>\> \If $T[N,K] \neq \infty$ \\
+    3\>\>\> $\Return T[N,K]$ \\
+    4\>\> \If $K=1$ \\
+    5\>\>\> $q = C[1,N]$ \\
+    6\>\> \Else \\
+    7\>\>\> $q = \infty$ \\
+    8\>\>\> \For $l = K-1\ \To N-1$ \\
+    9\>\>\>\> $q = min(q,Phone-TD-Aux(l,K-1,T)+c[l+1,N])$ \\
+    10\>\> $T[N,K] = q$ \\
+    11\>\> \Return $q$
+  \end{code}
+\end{solution}
+  \fi
+  \item[(e)] (6 points) [\textbf{Extra credit}] Finally, develop a
+  procedure $\textsc{Phone-Find}(N,K)$ (write pseudocode) that uses
+  the filled $T[\cdot,\cdot]$ to output an assignment of the letters
+  to the keys such that the text can be typed with $T[N,K]$ taps.
+  Write pseudocode and analyze the running time of your algorithm. \hint{
+  It might make sense to devise a Bottom Up Algorithm that constructs $T$ first
+  and also construct a helper matrix $L$. These matrices will be available
+  to the algorithm {\sc Phone-Find}. Note that you will only need to
+  use $L$ to construct the solution but you will need $T$ to construct $L$
+  in a bottom-up fashion.} .
+
+  \ifnum\me<2
+\begin{solution}   
+  \begin{code}
+    1\> $\textsc{Phone-Find}(N,K)$ \\
+    2\> let T[N][K] and L[N][K] to be new array \\
+    3\>Fullfill(T,L,N,K)\\
+    4\>Print-allocation(L)\\
+  \end{code}
+  \begin{code}
+    1\> $\textsc{Fullfill}(T,L,N,K)$ \\
+    2\>\> \For i =1 to N\\
+    3\>\> \> \For j = 1 to K \\
+    4\>\>\>\> \If j=1\\
+    5\>\>\>\>\>T[i][j] = C[1,i] and L[i][j] = 0 \\
+    6\>\>\>\> \Else $q = \infty$ \\
+    7\>\>\>\>\> \For $l = j-1\ \To i-1$ \\
+    8\>\>\>\>\>\> \If $q >$T[l][j-1]+c[l+1][N]\\
+    9\>\>\>\>\>\>\> $q = T[l][j-1]+c[l+1][N]$ \\
+    10\>\>\>\>\>\>\> $L[i][j] = l+1$ \\
+  \end{code}
+  \begin{code}
+    1\> $\textsc{Print-allocaiton}(L,N,K)$ \\
+    2\>\> \For i =K to 1\\
+    3\>\>\> l = L[N][i]\\
+    4\>\>\> Print(l)\\
+    5\>\>\> N=l-1\\  
+  \end{code}
+  In my code, the fullfill process have three loops, the first is from 1 to N, the second is from 1 to K, the third is from j-1 to i-1
+\end{solution}
+  \fi
+\end{itemize}
+\newproblem{Under the Rainbow}{12 points}
+Some of us are familiar with the tale of a pot of gold at the end of
+every rainbow, guarded by a wily leprechaun. Imagine that you have somehow
+gone to the end of the rainbow and you are confronted with $n$ pots
+labeled $[1\ldots n]$ which is guarded by a very smart leprechaun. 
+Each pot has a value $v_i$ attached to it. The leprechaun is annoyed
+that you have found the pot of gold but admires your bravery. The leprechaun challenges you
+to play a game: Both of you take turns picking a pot and you can leave
+with whatever you have chosen. The leprechaun graciously agrees to go second
+but there is a catch. You can only pick a pot
+either from the beginning or the end.
+
+The leprechaun is as smart as you. When it is the turn of the leprechaun, it
+will choose its pot so as to \emph{minimize} what you can get from the remaining
+choices.
+You will use Dynamic Programming to formalize a strategy to win the game. You may assume
+that $n$ is even.
+\begin{itemize}
+\item[(a)](3 points) Consider the following ``greedy strategy''. You pick the best
+possible pot at each turn, i.e, you pick the pot with the higher value. Give an example
+where $n=4$ where this strategy is not optimal. Argue why this strategy is incorrect.
+\ifnum\me<2
+\begin{solution}   
+When it is 1,2,6,4. Then the first round i get 4. Then 1,2,6 is left. The leprechaun get the 6. 1 and 2 are left. Then i get 2. The leprechaun get 1. Finally, i get 4 and 2. The leprechaun get 6 and 1, which is greater than me. Then this strategy is not optimal.\\[10pt]
+This algorithm is not optimal because it only consider the current situation without considering what will happen next. Actually, there may be some situations that firstly we take some small ones and then we can take some big ones. The sum of these two numbers can be bigger than the sum of both rounds taking the bigger one.
+\end{solution}
+\fi
+\item[(b)](5 points) Formulate a recursive equation and argue the correctness of its
+optimality. You will use a two dimensional array. Clearly, 
+define the meaning of $M[i,j]$ to help formulate this relation. \hint{Do not
+forget that the leprechaun makes its move in such a way that your winnings
+are minimized from the remaining choices.}
+\ifnum\me<2
+\begin{solution}   
+Define M[i,j] as the maximum value i can get from pot i to pot j. $x =pots[i]+min(M[i+2,j],M[i+1,j-1]) $ ,$y = pots[j]+min(M[i+1,j-1],M[i,j-2])$
+
+\begin{equation}
+  M[i,j]=\left\{
+  \begin{aligned}
+    pots[i]& &\text{i=j}\\
+    max(pots[i],pots[j])& &\text{j=i+1}\\
+    max(x,y) & &\text{$1 \le i \le n-2\ and \ i+2 \le j \le n$}\\
+  \end{aligned}
+  \right.
+  \end{equation}
+
+\end{solution}
+\fi
+\item[(c)](4 points) Write a bottom-up (iterative) algorithm to solve the problem and 
+return the maximum value possible. This will implement the above recursive formulation.
+What is the runtime of your algorithm? It will take as input the array $V$ of values
+and size $n$ of the array $V$. Fill in the blanks in the template below
+to complete the bottom-up algorithm. 
+
+\begin{code}
+		1 Initialize $n\times n$ matrix $M$. \\
+		2 {\sc UnderTheRainbow}$(V,n)$\\
+		3 \> \For $i=1$ \To $n-1$ //Initialize the base cases here.\\
+		4 \> \> $\ldots\ldots\ldots\ldots\ldots$\\
+		5 \> \> $\ldots\ldots\ldots\ldots\ldots$\\
+		6 \> $M[n][n]=\ldots\ldots\ldots\ldots$\\
+		7 \> \For $i=n-2$ \To $1$\\
+		8 \> \> \For $j=\ldots\ldots\To\ldots\ldots\ldots$\\
+		9 \> \> \> $value1=\ldots\ldots\ldots\ldots\ldots$\\
+		10 \> \> \> $value2=\ldots\ldots\ldots\ldots\ldots$\\
+		11 \> \> \> $value3=\ldots\ldots\ldots\ldots\ldots$\\
+		12 \> \> \> $case1=\ldots\ldots\ldots\ldots\ldots$\\
+		13 \> \> \> $case2=\ldots\ldots\ldots\ldots\ldots$\\
+		14 \> \> \> $M[i][j]=\max(case1,case2)$\\
+		15 \> \Return $M[1][n]$
+	\end{code}
+
+\ifnum\me<2
+\begin{solution}   
+  \begin{code}
+		1 Initialize $n\times n$ matrix $M$. \\
+		2 {\sc UnderTheRainbow}$(V,n)$\\
+		3 \> \For $i=1$ \To $n-1$ //Initialize the base cases here.\\
+		4 \> \> M[i][i] = V[i]\\
+		5 \> \> M[i][i+1] = max(V[i],V[i+1])\\
+		6 \> $M[n][n]= V[n]$\\
+		7 \> \For $i=n-2$ \To $1$\\
+		8 \> \> \For $j=i+2 \To n$\\
+		9 \> \> \> $value1= M[i + 2][j] $\\
+		10 \> \> \> $value2= M[i + 1][j - 1]$\\
+		11 \> \> \> $value3=M[i][j - 2]$\\
+		12 \> \> \> $case1=V[i]+min(value1,value2)$\\
+		13 \> \> \> $case2=V[j]+min(value2,value3)$\\
+		14 \> \> \> $M[i][j]=\max(case1,case2)$\\
+		15 \> \Return $M[1][n]$
+	\end{code}
+The runtime of my code is $O(n^2)$
+\end{solution}
+\fi
+\end{itemize}
+\newproblem{Babysitting Dilemma}{13 points}
+
+\noindent
+You are a CFO of a baby sitting company, and got a request to baby sit
+$n$ children one day. You can hire several babysitters for a day for a
+fixed cost $B$ per babysitter. Also, you can assign an arbitrary
+number of children $i\ge 1$ to a babysitter. However, each parent will
+only pay some amount $p[i]$ if his child is taken care of by a
+babysitter who looks after $i$ children. For example, if $n=7$ and you
+hire $2$ babysitters who looks after $3$ and $4$ children,
+respectively, you revenue is $3p[3] + 4p[4] - 2B$.
+
+Given $B,n,p[1],\ldots, p[n]$, your job is to assign children to
+babysitters as to maximize your total profit. Namely, you want to find
+an optimal number $k$ and an optimal partition $n=n_1+\ldots+n_k$ so
+as to maximize revenue $R = n_1\cdot p[n_1]+\ldots+n_k \cdot p[n_k] -
+k\cdot B$.
+
+\begin{itemize}
+\item[(a)] (5 points) Let $R[i]$ denote the optimum revenue you can get by
+looking after $i$ children. E.g., $R[0]=0$, $R[1] = p[1]-B$, $R[2] =
+\max(2p[1]-2B, 2p[2]-B)$, etc. Write a recursive formula for
+$R[n]$ in terms of values $R[j]$ for $j<n$.
+
+\ifnum\me<2
+\begin{solution}   
+  \begin{equation}
+  R[n]=\left\{
+  \begin{aligned}
+  0 & &\text{n=0}\\
+  p(1)-B & &\text{n=1}\\
+  $\max\limits_{1 \le k \le n-1} R[k]+R[n-k],np(n)-B$ & &\text{$2 \le n$}\\
+  \end{aligned}
+  \right.
+  \end{equation}
+\end{solution}
+\fi
+
+\item[(b)] (4 points) Write an iterative bottom-up procedure to compute the
+optimal revenue.
+
+\ifnum\me<2
+\begin{solution}  
+  \begin{code}
+		2 {\sc optimalRevenue}$(B,n,p)$\\
+    3 \> \If n=0 \Then \Return 0\\
+    4 \> \If n=1 \Then \Return p[1]-B\\
+		5 \> let R[n] to be new array,all of them equal to $-\infty$\\
+		6 \> R[0] = 0,R[1] = p[1]-B\\
+		7 \> \For $i=2$ \To $n$\\
+		8 \> \> \For  j = 1 \To i-1\\
+		9 \> \> \> R[i] = max(R[j]+R[n-j ],R[i])\\
+		10 \> \> R[i] = max(R[i],ip[i]-B)\\
+		11 \> \Return $R[n]$
+	\end{code}
+\end{solution}
+\fi
+
+\item[(c)] (4 points) Explain how to augment your procedure (in part (b)) to also compute the optimal number of babysitters $k$ and the
+actual partition of children. Either English or pseudocode will work.
+
+\ifnum\me<2
+\begin{solution}   
+  In this pseudocode the R[n][1] record the optimal revenue. R[n][2] record the optimal number of babysitters. R[n][3] record the optimal partition. And R[n][3] is also an array. Here we denote it as Count[n].If Count[i] = j means each of these j babysitters will take care of i babies.
+  \begin{code}
+		2 {\sc optimalRevenue}$(B,n,p)$\\
+    3 \> \If n=0 \Then \Return 0\\
+    4 \> \If n=1 \Then \Return p[1]-B\\
+		5 \> let R[n][3] to be new array,all of R[n][1] equal to $-\infty$\\
+		6 \> R[0][1] = 0,R[0][2] = 0,R[1][1] = p[1]-B,R[1][2] = 1,R[1][3][1]=1\\
+		7 \> \For $i=2$ \To $n$\\
+		8 \> \> \For  j = 1 \To i-1\\
+    9 \> \> \> \If R[j][1]+R[n-j][1]$>$R[i][1]\\
+    10 \> \>\>\> R[i][1] =  R[j][1]+R[n-j][1],R[i][2] =  R[j][2]+R[n-j][2],and all of R[i][3]  set to zero\\
+    11 \> \>\>\> \For a =1 to n\\
+    12 \>\>\>\>\> R[i][3][a] = R[j][3][a]+R[n-j][3][a]\\
+    13 \> \> \If ip[i]-B $>$R[i][1]\\
+    14 \> \> \>R[i][1] = ip[i]-B,R[i][2] = 1,and all of R[i][3]  set to zero\\
+    15 \>\>\>R[i][3][i]=1\\
+		16 \> \Return $R[n]$
+	\end{code}
+
+\end{solution}
+\fi
+
+\end{itemize}
+
+
+\end{document}
+
+

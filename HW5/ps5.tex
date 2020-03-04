@@ -1,0 +1,397 @@
+% me=0 student solutions (ps file), me=1 - my solutions (sol file),
+% me=2 - assignment (hw file)
+\def\me{0} \def\num{5} %homework number
+
+\def\due{5 pm Thursday, October 10} %due date
+
+\def\course{CSCI-GA.1170-001/002 Fundamental Algorithms} 
+%course name, changed only once
+
+% **** INSERT YOUR NAME HERE ****
+\def\name{jingshuai jiang}
+
+% **** INSERT YOUR NETID HERE ****
+\def\netid{jj2903}
+
+% **** INSERT NETIDs OF YOUR COLLABORATORS HERE ****
+\def\collabs{NetID1, NetID2}
+
+
+\iffalse
+
+INSTRUCTIONS: replace # by the homework number.  (if this is not
+ps#.tex, use the right file name)
+
+Clip out the ********* INSERT HERE ********* bits below and insert
+appropriate LaTeX code.  There is a section below for student macros.
+It is not recommended to change any other parts of the code.
+
+
+\fi
+%
+
+\documentclass[11pt]{article}
+
+
+% ==== Packages ====
+\usepackage{amsfonts,amsmath}
+\usepackage{latexsym}
+\usepackage{fullpage}
+\usepackage{graphicx}
+\usepackage[bottom]{footmisc}
+
+
+% \setlength{\oddsidemargin}{.0in} \setlength{\evensidemargin}{.0in}
+% \setlength{\textwidth}{6.5in} \setlength{\topmargin}{-0.4in}
+\setlength{\footskip}{1in} \setlength{\textheight}{8.5in}
+
+\newcommand{\handout}[5]{
+\renewcommand{\thepage}{#1, Page \arabic{page}}
+  \noindent
+  \begin{center}
+    \framebox{ \vbox{ \hbox to 5.78in { {\bf \course} \hfill #2 }
+        \vspace{4mm} \hbox to 5.78in { {\Large \hfill #5 \hfill} }
+        \vspace{2mm} \hbox to 5.78in { {\it #3 \hfill #4} }
+        \ifnum\me=0
+        \vspace{2mm} \hbox to 5.78in { {\it Collaborators: \collabs
+            \hfill} }
+        \fi
+      } }
+  \end{center}
+  \vspace*{4mm}
+}
+
+\newcounter{pppp}
+\newcommand{\prob}{\arabic{pppp}} %problem number
+\newcommand{\increase}{\addtocounter{pppp}{1}} %problem number
+
+% Arguments: Title, Number of Points
+\newcommand{\newproblem}[2]{
+  \ifnum\me=0
+    \ifnum\prob>0 \newpage \fi
+    \increase
+    \setcounter{page}{1}
+    \handout{\name{} (\netid), Homework \num, Problem \arabic{pppp}}
+    {\today}{Name: \name{} (\netid)}{Due: \due}
+    {Solutions to Problem \prob\ of Homework \num\ (#2)}
+  \else
+    \increase
+    \section*{Problem \num-\prob~(#1) \hfill {#2}}
+  \fi
+}
+
+% \newcommand{\newproblem}[2]{\increase
+% \section*{Problem \num-\prob~(#1) \hfill {#2}}
+% }
+
+\def\squarebox#1{\hbox to #1{\hfill\vbox to #1{\vfill}}}
+\def\qed{\hspace*{\fill}
+  \vbox{\hrule\hbox{\vrule\squarebox{.667em}\vrule}\hrule}}
+\newenvironment{solution}{\begin{trivlist}\item[]{\bf Solution:}}
+  {\qed \end{trivlist}}
+\newenvironment{solsketch}{\begin{trivlist}\item[]{\bf Solution
+      Sketch:}} {\qed \end{trivlist}}
+\newenvironment{code}{\begin{tabbing}
+    12345\=12345\=12345\=12345\=12345\=12345\=12345\=12345\= \kill }
+  {\end{tabbing}}
+
+%\newcommand{\eqref}[1]{Equation~(\ref{eq:#1})}
+
+\newcommand{\hint}[1]{({\bf Hint}: {#1})}
+% Put more macros here, as needed.
+\newcommand{\room}{\medskip\ni}
+\newcommand{\brak}[1]{\langle #1 \rangle}
+\newcommand{\bit}[1]{\{0,1\}^{#1}}
+\newcommand{\zo}{\{0,1\}}
+\newcommand{\C}{{\cal C}}
+
+\newcommand{\nin}{\not\in}
+\newcommand{\set}[1]{\{#1\}}
+\renewcommand{\ni}{\noindent}
+\renewcommand{\gets}{\leftarrow}
+\renewcommand{\to}{\rightarrow}
+\newcommand{\assign}{:=}
+
+\newcommand{\AND}{\wedge}
+\newcommand{\OR}{\vee}
+
+\newcommand{\For}{\mbox{\bf for }}
+\newcommand{\To}{\mbox{\bf to }}
+\newcommand{\Do}{\mbox{\bf do }}
+\newcommand{\If}{\mbox{\bf if }}
+\newcommand{\Then}{\mbox{\bf then }}
+\newcommand{\Else}{\mbox{\bf else }}
+\newcommand{\While}{\mbox{\bf while }}
+\newcommand{\Repeat}{\mbox{\bf repeat }}
+\newcommand{\Until}{\mbox{\bf until }}
+\newcommand{\Return}{\mbox{\bf return }}
+\newcommand{\Halt}{\mbox{\bf halt }}
+\newcommand{\Swap}{\mbox{\bf swap }}
+\newcommand{\Ex}[2]{\textrm{exchange } #1 \textrm{ with } #2}
+
+
+
+\begin{document}
+
+\ifnum\me=0
+
+% Collaborators (on a per task basis):
+%
+% Task 1: *********** INSERT COLLABORATORS HERE *********** 
+% Task 2: *********** INSERT COLLABORATORS HERE *********** 
+% etc.
+%
+
+\fi
+
+\ifnum\me=1
+
+\handout{PS \num}{\today}{Lecturer: Yevgeniy Dodis}{Due: \due}
+{Solution {\em Sketches} to Problem Set \num}
+
+\fi
+
+\ifnum\me=2
+
+\handout{PS \num}{\today}{Lecturer: Yevgeniy Dodis}{Due: \due}{Problem
+  Set \num}
+
+\fi
+
+\newproblem{Roller coaster}{7 points}
+
+\noindent
+We will call an array $B[1\ldots n]$ \emph{a roller coaster} if $B[1] < B[2]$, $B[2] > B[3]$, $B[3] < B[4]$ and so on. More formally: $B[2i] > B[2i +1 ]$ and $B[2i-1] < B[2i]$ for all $i$.
+
+Give a linear algorithm that any given array $A$ with $n$ distinct elements transforms into a roller coaster array $B$. Namely, $B$ must contain exactly the same $n$ distinct elements as $A$, but must also be a roller coaster. Briefly argue correctness and the run time
+of your algorithm. 
+\hint{A median may be useful here.}
+
+\ifnum\me<2
+\begin{solution}   
+  \begin{code}
+    1 {\sc Roller-coaster}$(B)$\\
+    2\> $for\ i=1\ to\ n-1$ \\
+    3\>\> if i is an odd\\
+    4\>\>\> if B[i] $ >$ B[i+1] \\
+    5 \>\>\>\> swap(B[i],B[i+1])\\
+    6 \>\> if i is an even\\
+    7\>\>\> if B[i] $<$ B[i+1] \\
+    8 \>\>\>\> swap(B[i],B[i+1])\\
+    9 \> return B\\
+    \end{code}
+
+    Since we have to satisfy the condition of $B[2i] > B[2i +1 ]$ and $B[2i-1] < B[2i]$ for all $i$ we just scan the whole array from the beginning and check it with the following element. And if they do not obey the rule, just swap them.
+    Because we have make sure that $B[2i-1] < B[2i]$ if $B[2i] < B[2i +1 ]$ when we swap $2i$ and $2i+1$. Then the $B[2i]$ after the swap will also be bigger than $B[2i-1]$. And it is the same about an odd number with its precursor and its successor.
+    \\[10pt] The running time will be $O(n)$ 
+   \end{solution}
+\fi
+
+
+\newproblem{Too Fast and ... Furious}{8 points}
+
+\noindent
+You receive a sales call from a new start-up called {\em MYPD} (which
+stands for ``Manage Your Priorities... Differently''). The MYPD agent
+tells you that they just developed a ground-breaking {\em
+comparison-based} priority queue. This queue implements {\em Insert}
+in time $\log_2 (\sqrt{n})$ and {\em Extract\_max} in time
+$\sqrt{\log_2 n}$. Explain to the agent that the company can soon be
+sued by its competitors because either (1) the queue is not
+comparison-based; or (2) the queue implementation is not correct; or
+(3) the running time they claim cannot be so good. To put differently,
+no such comparison-based priority queue can exist.\\
+\hint{Be very precise with the constant $c$ s.t. $\log_2 (n!) \approx
+cn\log n$.}
+
+\ifnum\me<2
+\begin{solution}   
+  \\[10pt] Conclusion: The Insersion time for comparsion-based priority-queue should be $O(h) = O(logn)$
+    We can view comparison-based insertion abstractly in terms of decision tree. In a decision tree, we annotate each inernal node by (insertion number : i) for some i in the range $1\le i \le n$ where n is the number of the array length before the insertion
+    .Then the leaves will be a permutation that present the array after the insertion. actually insertion a number into n-size array will have n+1 kinds of insertions.
+    Consider the tree with height h, have l leaves,because each possible insertion is a leaf then we get $$n+1 \le l \le 2^h$$ and $$h \ge log(n+1) = O(logn)$$
+    Which means the running time of insertion should at least be $O(logn)$ not $O(log\sqrt{n})$
+   \end{solution}
+\fi
+\newproblem{Lower Bound for Min-Element}{11 points}
+
+\noindent
+Recall that there exists a trivial algorithm for searching for a minimal element of an array of size $n$
+ that needs exactly $(n-1)$ comparisons. The purpose of this problem is to prove that this is optimal solution.
+
+You can assume that elements of the input array are distinct. As usual, you can represent any comparison-based algorithm for Min-Element problem as a binary decision tree, whose internal nodes are labeled by $(i:j)$ (meaning ``compare $A[i]$ and $A[j]$''), and a left child is chosen if and only iff $A[i] < A[j]$ (recall, we assume distinct elements). And the leaves are labeled by the index $i$ meaning that the smallest element in the arrange is $A[i]$.
+
+\begin{itemize}
+\item[(a)] (2 points warm-up)
+Show that the naive ``counting leaves'' application of decisional tree method (like the one used for sorting lower bound) will only give a very suboptimal lower bound $\Omega(\log n)$ for the Min-Element problem.
+
+\ifnum\me<2
+\begin{solution}   
+  \\[10pt]  The comparison-based decision tree to get the minimum value of an array will have $l$ leaves, and the height of h
+  \\[10pt]  and the binary tree of height of h can have at most $2^h$ leaves and the $l $leaves must cover all the possible situations that $minimum = A[i]$
+  and we get $$n \le l \le 2^h $$
+  then $$h>logn$$
+  which means that the lower bound is $\Omega(logn)$
+   \end{solution}
+\fi
+
+\item[(b)] (3 points) Here we will try to enrich the decisional tree by adding some additional info $S(v)$ to every vertex $v$. Precisely, $S(v)$ is the set of all indices $i$ which are ``consistent'' with all the comparisons made from the $root$ to $v$ (excluding $v$ itself), where ``consistent'' means that there exists an array $A$ whose minimum is $A[i]$ and the node $v$ is reached on input $i$. For example, if $v$ is any (reachable) leaf labeled by $i$, then $S(v) = \{i\}$ (as otherwise the algorithm would not be correct). Assuming the root node $root$ is labeled $(i:j)$, describe  $S(\textnormal{root})$, $S(\textnormal{root.left})$ and $S(\textnormal{root.right})$.
+
+\hint{What element is impossible to be minimal if you know that $A[i] < A[j]$?}
+
+\ifnum\me<2
+\begin{solution}   
+\\[10pt] $S(root) = all\ the\ index\ from\ 1\ to\ n$
+\\[10pt] $S(root.left) = all\ the\ index\ from\ 1\ to\ n\ except\ for\ j$
+\\[10pt] $S(root.right) = all\ the\ index\ from\ 1\ to\ n\ except\ for\ i$
+
+
+\end{solution}
+\fi
+
+\item[(c)] (3 points) Generalize part (b): show that for every vertex $v$ we have:
+$S(v.\textnormal{left}) = S(v) \setminus \{ \ldots \}$ and
+$S(v.\textnormal{right}) = S(v) \setminus \{ \ldots \}$ (you need to fill dots on your own).
+
+\ifnum\me<2
+\begin{solution}   
+  \\[10pt]$S(v.\textnormal{left}) = S(v) \setminus \{ v.j\}$
+  \\[10pt]$S(v.\textnormal{right}) = S(v) \setminus \{ v.i\}$
+  \end{solution}
+\fi
+
+\item[(d)] (3 points) Use (c) to prove that in any valid decision tree for Min-Element, {\em any} leaf (which is stronger than {\em some} leaf)  must have depth at least $(n-1)$.
+\hint{Think about $|S(v)|$ as $v$ goes from root to this leaf.}
+
+\ifnum\me<2
+\begin{solution}   
+   according to problem 5-3-(c) we can see that by using comparison-based min-element algorithm,we can only exclude one element from the whole index from 1 to n for one comparison.
+   In order for the $S(v)$ to have only one element. we have to perform at least $n-1$ comparisons.
+   Leaf nodes are those nodes with $|S(v)|=1$ . Any in order for leaf nodes to have only one element in $s(v)$ we should experience at least $n-1$ comparsions, which is a path all the way down from the root to the leaf. And we have n-1 nodes to wipe out an element on this way. 
+   so it must have depth at least $n-1$
+\end{solution}
+\fi
+
+\end{itemize}
+\newproblem{Choosing the Right Tool}{9 points}
+
+
+\noindent
+For each example choose one of the following sorting algorithms and
+carefully justify your choice: {\sc HeapSort}, {\sc RadixSort}, {\sc
+CountingSort}. Give the expected runtime for your choice as precisely as
+possible. If you choose Radix Sort then give a concrete choice for
+the basis (i.e. the value of ``$r$'' in the book) and justify it.
+\hint{We assume that the array itself is stored in memory, so before
+choosing the fastest algorithm, make sure you have the space to run it!}
+
+\begin{itemize}
+ \item[(a)] (3 points) Sort the length $2^{16}$ array $A$ of $128$-bit integers on a
+device with $100$MB of RAM.
+
+\ifnum\me<2
+\begin{solution}  
+  \\[10pt]The length $2^{16}$ array $A$ of $128$-bit integers actually takes about $2^{23} bits = 2^{20} Bytes = 1 MB $ RAM
+  \\[10pt] If it is counting sort then we should also allocate the memory for the counter which is an array whose length is $2^{128}$ and each cell of this array should have take 16-bits to represent the numbers and there is no space for this giant array.
+  \\[10pt] A is radixsort.  $r = logn = 16$
+  \\[10pt] The running time of A is $\Theta(\frac{b}{r} \cdot (n+2^r)) =\Theta(2^{20}) $
+
+   \end{solution}
+\fi
+
+
+ \item[(b)] (3 points) Sort the length $2^{24}$ array $A$ of $256$-bit integers on a
+device with $600$MB of RAM.
+
+\ifnum\me<2
+\begin{solution}   
+  \\[10pt]The length $2^{24}$ array $A$ of $256$-bit integers actually takes about $2^{32} bits = 2^{29} Bytes = 512 MB $ RAM
+  \\[10pt] If it is counting sort then we should also allocate the memory for the counter which is an array whose length is $2^{256}$ and each cell of this array should have take 24-bits to represent the numbers and there is no space for this giant array.
+   And if we choose radixsort and using CountingSort as the stable sort of radixsort it also does not have enough space. 
+   \\[10pt] Then B is HeapSort. 
+  \\[10pt] The running time of A is $\Theta(nlogn ) =\Theta(24 \cdot 2^{24}) $
+
+
+
+   \end{solution}
+\fi
+
+
+ \item[(c)] (3 points) Sort the length $2^{16}$ array $A$ of $16$-bit integers on a
+device with $1$GB of RAM.
+
+\ifnum\me<2
+\begin{solution}   
+  \\[10pt]The length $2^{16}$ array $A$ of $16$-bit integers actually takes about $2^{20} bits = 2^{17} Bytes = 128 KB $ RAM
+  \\[10pt] If it is counting sort then we should also allocate the memory for the counter which is an array whose length is $2^{16}$ and each cell of this array should have take 16-bits to represent the numbers and there is enough space for this array.
+  \\[10pt] Then C is CountingSort.
+  \\[10pt] The running time of A is $\Theta(n+k ) =\Theta( 2^{16}+ 2^{16}) =\Theta( 2^{17})$
+
+
+\end{solution}
+\fi
+\end{itemize}
+
+\newproblem{Finding the Major Elements}{ 6 (+9) points}
+
+
+\noindent
+Let us say that a number $x$ is {\em $c$-major} for an $n$-element array
+$A$, if more than  $n/c$ elements of $A$ are equal to $x$.
+\begin{itemize}
+ \item[(a)] (6 points) Give $O(n)$-time algorithm to find all $2$-major elements of
+$A$. How many could there be? Briefly argue correctness of your algorithm. 
+\hint{You may make calls to the {\sc Select} algorithm discussed in class and textbook.}
+\ifnum\me<2
+\begin{solution}   
+  \\[10pt]There could only be one such element. Because more than $\frac{n}{2}$ elements of A should be equal to x.
+  \\[10pt] If there exist such element. Since there are more than $\frac{n}{2}$ elements of A equal to x, then the median should be this element.
+  \\[10pt] Then we scan the whole array to see if there exist such elements. If over half of this array is this elements. Then return this element else return null.
+  \begin{code}
+    1 {\sc 2-major Elements}$(A)$\\
+    2 \> a = Select(A, n/2) \\
+    3 \> count = 0 \\
+    4 \> $for \ j=1\ to\ n$\\
+    5 \>\> \If $A[j] == a$ \\
+    6 \>\>\> count++\\ 
+    7 \> $if\ count \ge \frac{n}{2}$\\
+    8 \>\> return a\\
+    9 \> return null\\
+    \end{code}
+  \end{solution}
+\fi
+
+\item[(b)] (9 points)  [\textbf{Extra Credit}] Give $O(cn)$-time algorithm to find all $c$-major elements
+of $A$. How many could there be? Briefly argue correctness of your algorithm.
+\hint{You may make calls to the {\sc Select} algorithm discussed in class and textbook.}
+\ifnum\me<2
+\begin{solution}   
+  \\[10pt] There could be at most c-1 such elements
+  \begin{code}
+    1 {\sc c-major Elements}$(A)$\\
+    2\> $for\ i=1\ to\ c$ \\
+    3\>\> a[i] = Select(A,$\frac{i \cdot n}{c}$)\\
+    4\>\> count[i] =0\\
+    4 \> $for \ j=1\ to\ n$\\
+    5 \>\> $for\ i=0\ to\ c$\\
+    6 \>\>\> \If $A[j] == a[i]$ \\
+    7 \>\>\>\> count[i]++\\ 
+    8 \> $for\ i=1\ to\ c$\\
+    9 \>\> $if\ count[i] \ge \frac{n}{c}$\\
+    10\>\>\> list.append(a[i])\\
+    11 \> return list\\
+    \end{code}
+    \\[10pt] If the element is a c-major element, it should cover a length at least for $\frac{n}{c}$. These elements should remain the same in this length. And this length will cover at least one $\frac{n}{c} \cdot i\ th$ point of this array.
+     Then we just need to get these and check whether these $\frac{n}{c} \cdot i\ th$ points are actually c-majored.
+   \end{solution}
+   
+\fi
+\end{itemize}
+
+
+
+
+\end{document}
+
+
+	
